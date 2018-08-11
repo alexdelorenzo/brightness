@@ -27,10 +27,10 @@ All dependencies can be installed with `pip3 install -r requirements.txt`.
 Or `pip3 install wmi`
 
 #### Linux
-Please install `xbacklight`.
+Please install `xbacklight` and `xprintidle`.
 
 ##### Ubuntu & Debian
-`sudo apt install xbacklight`
+`sudo apt install xbacklight xprintidle`
 
 ### Application Dependencies
 `pip3 install -r requirements.txt`

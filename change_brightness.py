@@ -60,7 +60,7 @@ else:
     raise Exception('Unknown host platform. This works on macOS, Windows and Linux.')
 
 
-def get_hid_idle() -> float:
+def get_mac_idle() -> float:
     status, hid_idle_seconds = getstatusoutput(HID_IDLE_CMD)
 
     if status != STATUS_SUCCESS:
@@ -68,6 +68,25 @@ def get_hid_idle() -> float:
 
     return float(hid_idle_seconds)
 
+
+def get_linux_idle() -> float:
+    status, idle = getstatusoutput("xprintidle")
+
+    if status != STATUS_SUCCESS:
+        return NO_IDLE
+
+    return float(idle)
+
+
+IDLE_FUNCS: Dict[str, Callable[[], float]] = {
+    'Darwin': get_mac_idle,
+    'Linux': get_linux_idle,
+    'Windows': lambda x: NO_IDLE
+}
+
+
+def get_idle() -> float:
+    return IDLE_FUNCS[_platform]()
 
 # def get_brightness() -> float:
 #     IODisplayGetFloatParameter(service, 0, kIODisplayBrightnessKey, brightness)
@@ -122,17 +141,33 @@ def contains_face(frame: np.array) -> bool:
 
 def detect_and_adjust(capture_device: int,
                       brightness: int = NO_BRIGHTNESS,
-                      idle_min: float = IDLE_MIN_SEC,
+                      idle_minimum: float = IDLE_MIN_SEC,
                       frames: int = FRAMES) -> float:
-    hid_idle = get_hid_idle()
+    """
+    Detect if the system is idle, if it is, then see if we can
+    capture a face from the given capture_device.
 
-    if not hid_idle > idle_min:
-        return idle_min - hid_idle
+    If there's at least one face, don't set the brightness.
+
+    If there's no faces, set the brightness to brightness.
+
+    When done, return the amount of seconds until the next invocation.
+
+    :param capture_device:
+    :param brightness:
+    :param idle_minimum:
+    :param frames:
+    :return:
+    """
+    idle_time = get_idle()
+
+    if not idle_time > idle_minimum:
+        return idle_minimum - idle_time
 
     if not any(map(contains_face, get_snapshots(capture_device, frames))):
         set_brightness(brightness)
 
-    return idle_min
+    return idle_minimum
 
 
 @click.command(help="Use system idle information and facial recognition to change screen brightness "
