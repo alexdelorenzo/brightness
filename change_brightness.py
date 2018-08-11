@@ -86,7 +86,7 @@ def set_brightness_mac(brightness: int) -> int:
 def set_brightness_windows(brightness: int):
     return wmi.WMI(namespace='wmi') \
         .WmiMonitorBrightnessMethods()[0] \
-        .WmiSetBrightness(brightness * 100, 0)
+        .WmiSetBrightness(brightness, 0)
 
 
 def set_brightness_linux(brightness: int) -> int:
