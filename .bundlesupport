@@ -1,0 +1,1451 @@
+<?xml version='1.0'?>
+<!DOCTYPE signatures SYSTEM "file://localhost/System/Library/DTDs/BridgeSupport.dtd">
+<signatures version='1.0'>
+<struct name='IOColorEntry' type='{IOColorEntry=&quot;index&quot;S&quot;red&quot;S&quot;green&quot;S&quot;blue&quot;S}'/>
+<struct name='IODetailedTimingInformation' type='{IODetailedTimingInformationV2=&quot;__reservedA&quot;[3L]&quot;horizontalScaledInset&quot;L&quot;verticalScaledInset&quot;L&quot;scalerFlags&quot;L&quot;horizontalScaled&quot;L&quot;verticalScaled&quot;L&quot;signalConfig&quot;L&quot;signalLevels&quot;L&quot;pixelClock&quot;Q&quot;minPixelClock&quot;Q&quot;maxPixelClock&quot;Q&quot;horizontalActive&quot;L&quot;horizontalBlanking&quot;L&quot;horizontalSyncOffset&quot;L&quot;horizontalSyncPulseWidth&quot;L&quot;verticalActive&quot;L&quot;verticalBlanking&quot;L&quot;verticalSyncOffset&quot;L&quot;verticalSyncPulseWidth&quot;L&quot;horizontalBorderLeft&quot;L&quot;horizontalBorderRight&quot;L&quot;verticalBorderTop&quot;L&quot;verticalBorderBottom&quot;L&quot;horizontalSyncConfig&quot;L&quot;horizontalSyncLevel&quot;L&quot;verticalSyncConfig&quot;L&quot;verticalSyncLevel&quot;L&quot;numLinks&quot;L&quot;verticalBlankingExtension&quot;L&quot;pixelEncoding&quot;S&quot;bitsPerColorComponent&quot;S&quot;colorimetry&quot;S&quot;dynamicRange&quot;S&quot;__reservedB&quot;[4L]}' type64='{IODetailedTimingInformationV2=&quot;__reservedA&quot;[3I]&quot;horizontalScaledInset&quot;I&quot;verticalScaledInset&quot;I&quot;scalerFlags&quot;I&quot;horizontalScaled&quot;I&quot;verticalScaled&quot;I&quot;signalConfig&quot;I&quot;signalLevels&quot;I&quot;pixelClock&quot;Q&quot;minPixelClock&quot;Q&quot;maxPixelClock&quot;Q&quot;horizontalActive&quot;I&quot;horizontalBlanking&quot;I&quot;horizontalSyncOffset&quot;I&quot;horizontalSyncPulseWidth&quot;I&quot;verticalActive&quot;I&quot;verticalBlanking&quot;I&quot;verticalSyncOffset&quot;I&quot;verticalSyncPulseWidth&quot;I&quot;horizontalBorderLeft&quot;I&quot;horizontalBorderRight&quot;I&quot;verticalBorderTop&quot;I&quot;verticalBorderBottom&quot;I&quot;horizontalSyncConfig&quot;I&quot;horizontalSyncLevel&quot;I&quot;verticalSyncConfig&quot;I&quot;verticalSyncLevel&quot;I&quot;numLinks&quot;I&quot;verticalBlankingExtension&quot;I&quot;pixelEncoding&quot;S&quot;bitsPerColorComponent&quot;S&quot;colorimetry&quot;S&quot;dynamicRange&quot;S&quot;__reservedB&quot;[4I]}'/>
+<struct name='IODetailedTimingInformationV1' type='{IODetailedTimingInformationV1=&quot;pixelClock&quot;L&quot;horizontalActive&quot;L&quot;horizontalBlanking&quot;L&quot;horizontalBorder&quot;L&quot;horizontalSyncOffset&quot;L&quot;horizontalSyncWidth&quot;L&quot;verticalActive&quot;L&quot;verticalBlanking&quot;L&quot;verticalBorder&quot;L&quot;verticalSyncOffset&quot;L&quot;verticalSyncWidth&quot;L}' type64='{IODetailedTimingInformationV1=&quot;pixelClock&quot;I&quot;horizontalActive&quot;I&quot;horizontalBlanking&quot;I&quot;horizontalBorder&quot;I&quot;horizontalSyncOffset&quot;I&quot;horizontalSyncWidth&quot;I&quot;verticalActive&quot;I&quot;verticalBlanking&quot;I&quot;verticalBorder&quot;I&quot;verticalSyncOffset&quot;I&quot;verticalSyncWidth&quot;I}'/>
+<struct name='IODetailedTimingInformationV2' type='{IODetailedTimingInformationV2=&quot;__reservedA&quot;[3L]&quot;horizontalScaledInset&quot;L&quot;verticalScaledInset&quot;L&quot;scalerFlags&quot;L&quot;horizontalScaled&quot;L&quot;verticalScaled&quot;L&quot;signalConfig&quot;L&quot;signalLevels&quot;L&quot;pixelClock&quot;Q&quot;minPixelClock&quot;Q&quot;maxPixelClock&quot;Q&quot;horizontalActive&quot;L&quot;horizontalBlanking&quot;L&quot;horizontalSyncOffset&quot;L&quot;horizontalSyncPulseWidth&quot;L&quot;verticalActive&quot;L&quot;verticalBlanking&quot;L&quot;verticalSyncOffset&quot;L&quot;verticalSyncPulseWidth&quot;L&quot;horizontalBorderLeft&quot;L&quot;horizontalBorderRight&quot;L&quot;verticalBorderTop&quot;L&quot;verticalBorderBottom&quot;L&quot;horizontalSyncConfig&quot;L&quot;horizontalSyncLevel&quot;L&quot;verticalSyncConfig&quot;L&quot;verticalSyncLevel&quot;L&quot;numLinks&quot;L&quot;verticalBlankingExtension&quot;L&quot;pixelEncoding&quot;S&quot;bitsPerColorComponent&quot;S&quot;colorimetry&quot;S&quot;dynamicRange&quot;S&quot;__reservedB&quot;[4L]}' type64='{IODetailedTimingInformationV2=&quot;__reservedA&quot;[3I]&quot;horizontalScaledInset&quot;I&quot;verticalScaledInset&quot;I&quot;scalerFlags&quot;I&quot;horizontalScaled&quot;I&quot;verticalScaled&quot;I&quot;signalConfig&quot;I&quot;signalLevels&quot;I&quot;pixelClock&quot;Q&quot;minPixelClock&quot;Q&quot;maxPixelClock&quot;Q&quot;horizontalActive&quot;I&quot;horizontalBlanking&quot;I&quot;horizontalSyncOffset&quot;I&quot;horizontalSyncPulseWidth&quot;I&quot;verticalActive&quot;I&quot;verticalBlanking&quot;I&quot;verticalSyncOffset&quot;I&quot;verticalSyncPulseWidth&quot;I&quot;horizontalBorderLeft&quot;I&quot;horizontalBorderRight&quot;I&quot;verticalBorderTop&quot;I&quot;verticalBorderBottom&quot;I&quot;horizontalSyncConfig&quot;I&quot;horizontalSyncLevel&quot;I&quot;verticalSyncConfig&quot;I&quot;verticalSyncLevel&quot;I&quot;numLinks&quot;I&quot;verticalBlankingExtension&quot;I&quot;pixelEncoding&quot;S&quot;bitsPerColorComponent&quot;S&quot;colorimetry&quot;S&quot;dynamicRange&quot;S&quot;__reservedB&quot;[4I]}'/>
+<struct name='IODisplayModeInformation' type='{IODisplayModeInformation=&quot;nominalWidth&quot;L&quot;nominalHeight&quot;L&quot;refreshRate&quot;L&quot;maxDepthIndex&quot;l&quot;flags&quot;L&quot;imageWidth&quot;S&quot;imageHeight&quot;S&quot;reserved&quot;[3L]}' type64='{IODisplayModeInformation=&quot;nominalWidth&quot;I&quot;nominalHeight&quot;I&quot;refreshRate&quot;I&quot;maxDepthIndex&quot;i&quot;flags&quot;I&quot;imageWidth&quot;S&quot;imageHeight&quot;S&quot;reserved&quot;[3I]}'/>
+<struct name='IODisplayScalerInformation' type='{IODisplayScalerInformation=&quot;__reservedA&quot;[1L]&quot;version&quot;L&quot;__reservedB&quot;[2L]&quot;scalerFeatures&quot;L&quot;maxHorizontalPixels&quot;L&quot;maxVerticalPixels&quot;L&quot;__reservedC&quot;[5L]}' type64='{IODisplayScalerInformation=&quot;__reservedA&quot;[1I]&quot;version&quot;I&quot;__reservedB&quot;[2I]&quot;scalerFeatures&quot;I&quot;maxHorizontalPixels&quot;I&quot;maxVerticalPixels&quot;I&quot;__reservedC&quot;[5I]}'/>
+<struct name='IODisplayTimingRange' type='{IODisplayTimingRange=&quot;__reservedA&quot;[2L]&quot;version&quot;L&quot;__reservedB&quot;[5L]&quot;minPixelClock&quot;Q&quot;maxPixelClock&quot;Q&quot;maxPixelError&quot;L&quot;supportedSyncFlags&quot;L&quot;supportedSignalLevels&quot;L&quot;supportedSignalConfigs&quot;L&quot;minFrameRate&quot;L&quot;maxFrameRate&quot;L&quot;minLineRate&quot;L&quot;maxLineRate&quot;L&quot;maxHorizontalTotal&quot;L&quot;maxVerticalTotal&quot;L&quot;__reservedD&quot;[2L]&quot;charSizeHorizontalActive&quot;C&quot;charSizeHorizontalBlanking&quot;C&quot;charSizeHorizontalSyncOffset&quot;C&quot;charSizeHorizontalSyncPulse&quot;C&quot;charSizeVerticalActive&quot;C&quot;charSizeVerticalBlanking&quot;C&quot;charSizeVerticalSyncOffset&quot;C&quot;charSizeVerticalSyncPulse&quot;C&quot;charSizeHorizontalBorderLeft&quot;C&quot;charSizeHorizontalBorderRight&quot;C&quot;charSizeVerticalBorderTop&quot;C&quot;charSizeVerticalBorderBottom&quot;C&quot;charSizeHorizontalTotal&quot;C&quot;charSizeVerticalTotal&quot;C&quot;__reservedE&quot;S&quot;minHorizontalActiveClocks&quot;L&quot;maxHorizontalActiveClocks&quot;L&quot;minHorizontalBlankingClocks&quot;L&quot;maxHorizontalBlankingClocks&quot;L&quot;minHorizontalSyncOffsetClocks&quot;L&quot;maxHorizontalSyncOffsetClocks&quot;L&quot;minHorizontalPulseWidthClocks&quot;L&quot;maxHorizontalPulseWidthClocks&quot;L&quot;minVerticalActiveClocks&quot;L&quot;maxVerticalActiveClocks&quot;L&quot;minVerticalBlankingClocks&quot;L&quot;maxVerticalBlankingClocks&quot;L&quot;minVerticalSyncOffsetClocks&quot;L&quot;maxVerticalSyncOffsetClocks&quot;L&quot;minVerticalPulseWidthClocks&quot;L&quot;maxVerticalPulseWidthClocks&quot;L&quot;minHorizontalBorderLeft&quot;L&quot;maxHorizontalBorderLeft&quot;L&quot;minHorizontalBorderRight&quot;L&quot;maxHorizontalBorderRight&quot;L&quot;minVerticalBorderTop&quot;L&quot;maxVerticalBorderTop&quot;L&quot;minVerticalBorderBottom&quot;L&quot;maxVerticalBorderBottom&quot;L&quot;maxNumLinks&quot;L&quot;minLink0PixelClock&quot;L&quot;maxLink0PixelClock&quot;L&quot;minLink1PixelClock&quot;L&quot;maxLink1PixelClock&quot;L&quot;supportedPixelEncoding&quot;S&quot;supportedBitsPerColorComponent&quot;S&quot;supportedColorimetryModes&quot;S&quot;supportedDynamicRangeModes&quot;S&quot;__reservedF&quot;[1L]}' type64='{IODisplayTimingRange=&quot;__reservedA&quot;[2I]&quot;version&quot;I&quot;__reservedB&quot;[5I]&quot;minPixelClock&quot;Q&quot;maxPixelClock&quot;Q&quot;maxPixelError&quot;I&quot;supportedSyncFlags&quot;I&quot;supportedSignalLevels&quot;I&quot;supportedSignalConfigs&quot;I&quot;minFrameRate&quot;I&quot;maxFrameRate&quot;I&quot;minLineRate&quot;I&quot;maxLineRate&quot;I&quot;maxHorizontalTotal&quot;I&quot;maxVerticalTotal&quot;I&quot;__reservedD&quot;[2I]&quot;charSizeHorizontalActive&quot;C&quot;charSizeHorizontalBlanking&quot;C&quot;charSizeHorizontalSyncOffset&quot;C&quot;charSizeHorizontalSyncPulse&quot;C&quot;charSizeVerticalActive&quot;C&quot;charSizeVerticalBlanking&quot;C&quot;charSizeVerticalSyncOffset&quot;C&quot;charSizeVerticalSyncPulse&quot;C&quot;charSizeHorizontalBorderLeft&quot;C&quot;charSizeHorizontalBorderRight&quot;C&quot;charSizeVerticalBorderTop&quot;C&quot;charSizeVerticalBorderBottom&quot;C&quot;charSizeHorizontalTotal&quot;C&quot;charSizeVerticalTotal&quot;C&quot;__reservedE&quot;S&quot;minHorizontalActiveClocks&quot;I&quot;maxHorizontalActiveClocks&quot;I&quot;minHorizontalBlankingClocks&quot;I&quot;maxHorizontalBlankingClocks&quot;I&quot;minHorizontalSyncOffsetClocks&quot;I&quot;maxHorizontalSyncOffsetClocks&quot;I&quot;minHorizontalPulseWidthClocks&quot;I&quot;maxHorizontalPulseWidthClocks&quot;I&quot;minVerticalActiveClocks&quot;I&quot;maxVerticalActiveClocks&quot;I&quot;minVerticalBlankingClocks&quot;I&quot;maxVerticalBlankingClocks&quot;I&quot;minVerticalSyncOffsetClocks&quot;I&quot;maxVerticalSyncOffsetClocks&quot;I&quot;minVerticalPulseWidthClocks&quot;I&quot;maxVerticalPulseWidthClocks&quot;I&quot;minHorizontalBorderLeft&quot;I&quot;maxHorizontalBorderLeft&quot;I&quot;minHorizontalBorderRight&quot;I&quot;maxHorizontalBorderRight&quot;I&quot;minVerticalBorderTop&quot;I&quot;maxVerticalBorderTop&quot;I&quot;minVerticalBorderBottom&quot;I&quot;maxVerticalBorderBottom&quot;I&quot;maxNumLinks&quot;I&quot;minLink0PixelClock&quot;I&quot;maxLink0PixelClock&quot;I&quot;minLink1PixelClock&quot;I&quot;maxLink1PixelClock&quot;I&quot;supportedPixelEncoding&quot;S&quot;supportedBitsPerColorComponent&quot;S&quot;supportedColorimetryModes&quot;S&quot;supportedDynamicRangeModes&quot;S&quot;__reservedF&quot;[1I]}'/>
+<struct name='IOFBDPLinkConfig' type='{IOFBDPLinkConfig=&quot;version&quot;S&quot;bitRate&quot;C&quot;__reservedA&quot;[1C]&quot;t1Time&quot;S&quot;t2Time&quot;S&quot;t3Time&quot;S&quot;idlePatterns&quot;C&quot;laneCount&quot;C&quot;voltage&quot;C&quot;preEmphasis&quot;C&quot;downspread&quot;C&quot;scrambler&quot;C&quot;maxBitRate&quot;C&quot;maxLaneCount&quot;C&quot;maxDownspread&quot;C&quot;__reservedB&quot;[9C]}'/>
+<struct name='IOFBDisplayModeDescription' type='{IOFBDisplayModeDescription=&quot;info&quot;{IODisplayModeInformation}&quot;timingInfo&quot;{IOTimingInformation}}'/>
+<struct name='IOFBHDRMetaDataV1' type='{IOFBHDRMetaDataV1=&quot;displayPrimary_X0&quot;S&quot;displayPrimary_Y0&quot;S&quot;displayPrimary_X1&quot;S&quot;displayPrimary_Y1&quot;S&quot;displayPrimary_X2&quot;S&quot;displayPrimary_Y2&quot;S&quot;displayPrimary_X&quot;S&quot;displayPrimary_Y&quot;S&quot;desiredLuminance_Max&quot;S&quot;desiredLuminance_Min&quot;S&quot;desiredLightLevel_Avg&quot;S&quot;desiredLightLevel_Max&quot;S&quot;__reservedA&quot;[5Q]}'/>
+<struct name='IOFBMessageCallbacks' type='{IOFBMessageCallbacks=&quot;WillPowerOff&quot;^?&quot;DidPowerOn&quot;^?&quot;ConnectionChange&quot;^?&quot;WillPowerOffWithImages&quot;^?}'/>
+<struct name='IOFramebufferInformation' type='{IOFramebufferInformation=&quot;baseAddress&quot;L&quot;activeWidth&quot;L&quot;activeHeight&quot;L&quot;bytesPerRow&quot;L&quot;bytesPerPlane&quot;L&quot;bitsPerPixel&quot;L&quot;pixelType&quot;L&quot;flags&quot;L&quot;reserved&quot;[4L]}' type64='{IOFramebufferInformation=&quot;baseAddress&quot;I&quot;activeWidth&quot;I&quot;activeHeight&quot;I&quot;bytesPerRow&quot;I&quot;bytesPerPlane&quot;I&quot;bitsPerPixel&quot;I&quot;pixelType&quot;I&quot;flags&quot;I&quot;reserved&quot;[4I]}'/>
+<struct name='IOGBounds' type='{IOGBounds=&quot;minx&quot;s&quot;maxx&quot;s&quot;miny&quot;s&quot;maxy&quot;s}'/>
+<struct name='IOGPoint' type='{IOGPoint=&quot;x&quot;s&quot;y&quot;s}'/>
+<struct name='IOGSize' type='{IOGSize=&quot;width&quot;s&quot;height&quot;s}'/>
+<struct name='IOHardwareCursorDescriptor' type='{IOHardwareCursorDescriptor=&quot;majorVersion&quot;S&quot;minorVersion&quot;S&quot;height&quot;L&quot;width&quot;L&quot;bitDepth&quot;L&quot;maskBitDepth&quot;L&quot;numColors&quot;L&quot;colorEncodings&quot;^I&quot;flags&quot;L&quot;supportedSpecialEncodings&quot;L&quot;specialEncodings&quot;[16L]}' type64='{IOHardwareCursorDescriptor=&quot;majorVersion&quot;S&quot;minorVersion&quot;S&quot;height&quot;I&quot;width&quot;I&quot;bitDepth&quot;I&quot;maskBitDepth&quot;I&quot;numColors&quot;I&quot;colorEncodings&quot;^I&quot;flags&quot;I&quot;supportedSpecialEncodings&quot;I&quot;specialEncodings&quot;[16I]}'/>
+<struct name='IOHardwareCursorInfo' type='{IOHardwareCursorInfo=&quot;majorVersion&quot;S&quot;minorVersion&quot;S&quot;cursorHeight&quot;L&quot;cursorWidth&quot;L&quot;colorMap&quot;^{IOColorEntry}&quot;hardwareCursorData&quot;*&quot;cursorHotSpotX&quot;S&quot;cursorHotSpotY&quot;S&quot;reserved&quot;[5L]}' type64='{IOHardwareCursorInfo=&quot;majorVersion&quot;S&quot;minorVersion&quot;S&quot;cursorHeight&quot;I&quot;cursorWidth&quot;I&quot;colorMap&quot;^{IOColorEntry}&quot;hardwareCursorData&quot;*&quot;cursorHotSpotX&quot;S&quot;cursorHotSpotY&quot;S&quot;reserved&quot;[5I]}'/>
+<struct name='IOPixelInformation' type='{IOPixelInformation=&quot;bytesPerRow&quot;L&quot;bytesPerPlane&quot;L&quot;bitsPerPixel&quot;L&quot;pixelType&quot;L&quot;componentCount&quot;L&quot;bitsPerComponent&quot;L&quot;componentMasks&quot;[16L]&quot;pixelFormat&quot;[64c]&quot;flags&quot;L&quot;activeWidth&quot;L&quot;activeHeight&quot;L&quot;reserved&quot;[2L]}' type64='{IOPixelInformation=&quot;bytesPerRow&quot;I&quot;bytesPerPlane&quot;I&quot;bitsPerPixel&quot;I&quot;pixelType&quot;I&quot;componentCount&quot;I&quot;bitsPerComponent&quot;I&quot;componentMasks&quot;[16I]&quot;pixelFormat&quot;[64c]&quot;flags&quot;I&quot;activeWidth&quot;I&quot;activeHeight&quot;I&quot;reserved&quot;[2I]}'/>
+<opaque name='IONotificationPortRef' type='^{IONotificationPort=}'/>
+<constant name='kIOMasterPortDefault' type='I'/>
+<enum name='IOFBMessageCallbacksVersion' value='2'/>
+<enum name='kAndConnections' value='268435453'/>
+<enum name='kConnectionAudioStreaming' value='1635083379'/>
+<enum name='kConnectionBlueGammaScale' value='1650946915'/>
+<enum name='kConnectionChanged' value='1667788391'/>
+<enum name='kConnectionCheckEnable' value='1667591777'/>
+<enum name='kConnectionColorDepthsSupported' value='543322211'/>
+<enum name='kConnectionColorMode' value='1668904310'/>
+<enum name='kConnectionColorModesSupported' value='1668246642'/>
+<enum name='kConnectionControllerColorDepth' value='6582372'/>
+<enum name='kConnectionControllerDepthsSupported' value='6779492'/>
+<enum name='kConnectionControllerDitherControl' value='6775907'/>
+<enum name='kConnectionDisplayFlags' value='1684434023'/>
+<enum name='kConnectionDisplayParameterCount' value='1885564532'/>
+<enum name='kConnectionDisplayParameters' value='1885434477'/>
+<enum name='kConnectionEnable' value='1701732706'/>
+<enum name='kConnectionEnableAudio' value='1635083296'/>
+<enum name='kConnectionFlags' value='1718380403'/>
+<enum name='kConnectionFlushParameters' value='1718383987'/>
+<enum name='kConnectionGammaScale' value='1735615264'/>
+<enum name='kConnectionGreenGammaScale' value='1734832995'/>
+<enum name='kConnectionHandleDisplayPortEvent' value='1685088626'/>
+<enum name='kConnectionOverscan' value='1869833070'/>
+<enum name='kConnectionPanelTimingDisable' value='1886284916'/>
+<enum name='kConnectionPostWake' value='1886871915'/>
+<enum name='kConnectionPower' value='1886353266'/>
+<enum name='kConnectionProbe' value='1886547810'/>
+<enum name='kConnectionRedGammaScale' value='1919382371'/>
+<enum name='kConnectionSupportsAppleSense' value='1634954867'/>
+<enum name='kConnectionSupportsHLDDCSense' value='1751409763'/>
+<enum name='kConnectionSupportsLLDDCSense' value='1818518627'/>
+<enum name='kConnectionSyncEnable' value='1937337955'/>
+<enum name='kConnectionSyncFlags' value='1937335142'/>
+<enum name='kConnectionVBLMultiplier' value='1986161773'/>
+<enum name='kConnectionVideoBest' value='1986163572'/>
+<enum name='kDisplayModeAcceleratorBackedFlag' value='4194304'/>
+<enum name='kDisplayModeAlwaysShowFlag' value='8'/>
+<enum name='kDisplayModeBuiltInFlag' value='1024'/>
+<enum name='kDisplayModeDefaultFlag' value='4'/>
+<enum name='kDisplayModeInterlacedFlag' value='64'/>
+<enum name='kDisplayModeNativeFlag' value='33554432'/>
+<enum name='kDisplayModeNeverShowFlag' value='128'/>
+<enum name='kDisplayModeNotGraphicsQualityFlag' value='4096'/>
+<enum name='kDisplayModeNotPresetFlag' value='512'/>
+<enum name='kDisplayModeNotResizeFlag' value='16'/>
+<enum name='kDisplayModeRequiresPanFlag' value='32'/>
+<enum name='kDisplayModeSafeFlag' value='2'/>
+<enum name='kDisplayModeSafetyFlags' value='7'/>
+<enum name='kDisplayModeSimulscanFlag' value='256'/>
+<enum name='kDisplayModeStretchedFlag' value='2048'/>
+<enum name='kDisplayModeTelevisionFlag' value='1048576'/>
+<enum name='kDisplayModeValidFlag' value='1'/>
+<enum name='kDisplayModeValidForAirPlayFlag' value='16777216'/>
+<enum name='kDisplayModeValidForHiResFlag' value='8388608'/>
+<enum name='kDisplayModeValidForMirroringFlag' value='2097152'/>
+<enum name='kDisplayModeValidateAgainstDisplay' value='8192'/>
+<enum name='kDisplayProductIDGeneric' value='1815'/>
+<enum name='kDisplaySubPixelConfigurationDelta' value='1'/>
+<enum name='kDisplaySubPixelConfigurationQuad' value='4'/>
+<enum name='kDisplaySubPixelConfigurationStripe' value='2'/>
+<enum name='kDisplaySubPixelConfigurationStripeOffset' value='3'/>
+<enum name='kDisplaySubPixelConfigurationUndefined' value='0'/>
+<enum name='kDisplaySubPixelLayoutBGR' value='2'/>
+<enum name='kDisplaySubPixelLayoutQuadGBL' value='3'/>
+<enum name='kDisplaySubPixelLayoutQuadGBR' value='4'/>
+<enum name='kDisplaySubPixelLayoutRGB' value='1'/>
+<enum name='kDisplaySubPixelLayoutUndefined' value='0'/>
+<enum name='kDisplaySubPixelShapeElliptical' value='5'/>
+<enum name='kDisplaySubPixelShapeOval' value='4'/>
+<enum name='kDisplaySubPixelShapeRectangular' value='3'/>
+<enum name='kDisplaySubPixelShapeRound' value='1'/>
+<enum name='kDisplaySubPixelShapeSquare' value='2'/>
+<enum name='kDisplaySubPixelShapeUndefined' value='0'/>
+<enum name='kDisplayVendorIDUnknown' value='1970170734'/>
+<enum name='kFramebufferDisableAltivecAccess' value='524288'/>
+<enum name='kFramebufferSupportsCopybackCache' value='65536'/>
+<enum name='kFramebufferSupportsGammaCorrection' value='262144'/>
+<enum name='kFramebufferSupportsWritethruCache' value='131072'/>
+<enum name='kHardwareCursorDescriptorMajorVersion' value='1'/>
+<enum name='kHardwareCursorDescriptorMinorVersion' value='0'/>
+<enum name='kHardwareCursorInfoMajorVersion' value='1'/>
+<enum name='kHardwareCursorInfoMinorVersion' value='0'/>
+<enum name='kIOAnalogSetupExpected' value='2'/>
+<enum name='kIOAnalogSignalLevel_0700_0000' value='3'/>
+<enum name='kIOAnalogSignalLevel_0700_0300' value='0'/>
+<enum name='kIOAnalogSignalLevel_0714_0286' value='1'/>
+<enum name='kIOAnalogSignalLevel_1000_0400' value='2'/>
+<enum name='kIOBitsPerColorComponent10' value='4'/>
+<enum name='kIOBitsPerColorComponent12' value='8'/>
+<enum name='kIOBitsPerColorComponent16' value='16'/>
+<enum name='kIOBitsPerColorComponent6' value='1'/>
+<enum name='kIOBitsPerColorComponent8' value='2'/>
+<enum name='kIOBitsPerColorComponentNotSupported' value='0'/>
+<enum name='kIOCLUTPixels' value='0'/>
+<enum name='kIOCSyncDisable' value='4'/>
+<enum name='kIOCapturedAttribute' value='1667330148'/>
+<enum name='kIOClamshellStateAttribute' value='1668047213'/>
+<enum name='kIOColorimetryAdobeRGB' value='8'/>
+<enum name='kIOColorimetryBT2020' value='256'/>
+<enum name='kIOColorimetryBT2100' value='512'/>
+<enum name='kIOColorimetryBT601' value='64'/>
+<enum name='kIOColorimetryBT709' value='128'/>
+<enum name='kIOColorimetryDCIP3' value='4'/>
+<enum name='kIOColorimetryNativeRGB' value='1'/>
+<enum name='kIOColorimetryNotSupported' value='0'/>
+<enum name='kIOColorimetryWGRGB' value='32'/>
+<enum name='kIOColorimetrysRGB' value='2'/>
+<enum name='kIOColorimetryxvYCC' value='16'/>
+<enum name='kIOConnectionBuiltIn' value='2048'/>
+<enum name='kIOConnectionStereoSync' value='32768'/>
+<enum name='kIOCursorControlAttribute' value='1668445027'/>
+<enum name='kIODPEventAutomatedTestRequest' value='257'/>
+<enum name='kIODPEventContentProtection' value='258'/>
+<enum name='kIODPEventForceRetrain' value='3'/>
+<enum name='kIODPEventIdle' value='2'/>
+<enum name='kIODPEventMCCS' value='259'/>
+<enum name='kIODPEventRemoteControlCommandPending' value='256'/>
+<enum name='kIODPEventSinkSpecific' value='260'/>
+<enum name='kIODPEventStart' value='1'/>
+<enum name='kIODeferCLUTSetAttribute' value='1986227316'/>
+<enum name='kIODetailedTimingValid' value='-2147483648'/>
+<enum name='kIODigitalSignal' value='1'/>
+<enum name='kIODisplayColorMode' value='1668904310'/>
+<enum name='kIODisplayDitherAll' value='255'/>
+<enum name='kIODisplayDitherDefault' value='128'/>
+<enum name='kIODisplayDitherDisable' value='0'/>
+<enum name='kIODisplayDitherFrameRateControl' value='4'/>
+<enum name='kIODisplayDitherRGBShift' value='0'/>
+<enum name='kIODisplayDitherSpatial' value='1'/>
+<enum name='kIODisplayDitherTemporal' value='2'/>
+<enum name='kIODisplayDitherYCbCr422Shift' value='16'/>
+<enum name='kIODisplayDitherYCbCr444Shift' value='8'/>
+<enum name='kIODisplayMatchingInfo' value='256'/>
+<enum name='kIODisplayModeIDBootProgrammable' value='-5'/>
+<enum name='kIODisplayModeIDReservedBase' value='-2147483648'/>
+<enum name='kIODisplayNeedsCEAUnderscan' value='1'/>
+<enum name='kIODisplayNoProductName' value='1024'/>
+<enum name='kIODisplayOnlyPreferredName' value='512'/>
+<enum name='kIODisplayPowerStateMinUsable' value='1'/>
+<enum name='kIODisplayPowerStateOff' value='0'/>
+<enum name='kIODisplayPowerStateOn' value='2'/>
+<enum name='kIODisplayRGBColorComponentBits10' value='4'/>
+<enum name='kIODisplayRGBColorComponentBits12' value='8'/>
+<enum name='kIODisplayRGBColorComponentBits14' value='16'/>
+<enum name='kIODisplayRGBColorComponentBits16' value='32'/>
+<enum name='kIODisplayRGBColorComponentBits6' value='1'/>
+<enum name='kIODisplayRGBColorComponentBits8' value='2'/>
+<enum name='kIODisplayRGBColorComponentBitsUnknown' value='0'/>
+<enum name='kIODisplayYCbCr422ColorComponentBits10' value='262144'/>
+<enum name='kIODisplayYCbCr422ColorComponentBits12' value='524288'/>
+<enum name='kIODisplayYCbCr422ColorComponentBits14' value='1048576'/>
+<enum name='kIODisplayYCbCr422ColorComponentBits16' value='2097152'/>
+<enum name='kIODisplayYCbCr422ColorComponentBits6' value='65536'/>
+<enum name='kIODisplayYCbCr422ColorComponentBits8' value='131072'/>
+<enum name='kIODisplayYCbCr422ColorComponentBitsUnknown' value='0'/>
+<enum name='kIODisplayYCbCr444ColorComponentBits10' value='1024'/>
+<enum name='kIODisplayYCbCr444ColorComponentBits12' value='2048'/>
+<enum name='kIODisplayYCbCr444ColorComponentBits14' value='4096'/>
+<enum name='kIODisplayYCbCr444ColorComponentBits16' value='8192'/>
+<enum name='kIODisplayYCbCr444ColorComponentBits6' value='256'/>
+<enum name='kIODisplayYCbCr444ColorComponentBits8' value='512'/>
+<enum name='kIODisplayYCbCr444ColorComponentBitsUnknown' value='0'/>
+<enum name='kIODriverPowerAttribute' value='1685090167'/>
+<enum name='kIODynamicRangeDolbyNormalMode' value='4'/>
+<enum name='kIODynamicRangeDolbyTunnelMode' value='8'/>
+<enum name='kIODynamicRangeHDR10' value='2'/>
+<enum name='kIODynamicRangeNotSupported' value='0'/>
+<enum name='kIODynamicRangeSDR' value='1'/>
+<enum name='kIODynamicRangeTraditionalGammaHDR' value='16'/>
+<enum name='kIOFBAVSignalTypeDP' value='16'/>
+<enum name='kIOFBAVSignalTypeDVI' value='2'/>
+<enum name='kIOFBAVSignalTypeHDMI' value='8'/>
+<enum name='kIOFBAVSignalTypeUnknown' value='0'/>
+<enum name='kIOFBAVSignalTypeVGA' value='1'/>
+<enum name='kIOFBBitRateHBR' value='10'/>
+<enum name='kIOFBBitRateHBR2' value='20'/>
+<enum name='kIOFBBitRateRBR' value='6'/>
+<enum name='kIOFBBlitBeamSync' value='1'/>
+<enum name='kIOFBBlitBeamSyncAlways' value='2'/>
+<enum name='kIOFBBlitBeamSyncSpin' value='4'/>
+<enum name='kIOFBBlueGammaScaleAttribute' value='1735617634'/>
+<enum name='kIOFBChangedInterruptType' value='1667788391'/>
+<enum name='kIOFBConnectInterruptType' value='1684236576'/>
+<enum name='kIOFBConnectStateHWOnline' value='4'/>
+<enum name='kIOFBConnectStateOnline' value='1'/>
+<enum name='kIOFBConnectStateUnusable' value='2'/>
+<enum name='kIOFBDiagnoseConnectType' value='2'/>
+<enum name='kIOFBDisplayPortInterruptType' value='1685088626'/>
+<enum name='kIOFBDisplayPortLinkChangeInterruptType' value='1685089387'/>
+<enum name='kIOFBDisplayPortTrainingAttribute' value='1685091425'/>
+<enum name='kIOFBDisplayState' value='1685288052'/>
+<enum name='kIOFBDisplayState_AlreadyActive' value='1'/>
+<enum name='kIOFBDisplayState_Mask' value='7'/>
+<enum name='kIOFBDisplayState_PipelineBlack' value='4'/>
+<enum name='kIOFBDisplayState_RestoredProfile' value='2'/>
+<enum name='kIOFBFrameInterruptType' value='1718772077'/>
+<enum name='kIOFBGreenGammaScaleAttribute' value='1735617639'/>
+<enum name='kIOFBHBLInterruptType' value='1751280672'/>
+<enum name='kIOFBHDCPLimit_AllowAll' value='0'/>
+<enum name='kIOFBHDCPLimit_NoHDCP1x' value='1'/>
+<enum name='kIOFBHDCPLimit_NoHDCP20Type0' value='2'/>
+<enum name='kIOFBHDCPLimit_NoHDCP20Type1' value='4'/>
+<enum name='kIOFBHDRMetaDataAttribute' value='1751413357'/>
+<enum name='kIOFBLimitHDCPAttribute' value='1751409520'/>
+<enum name='kIOFBLimitHDCPStateAttribute' value='1934115907'/>
+<enum name='kIOFBLinkDownspreadMax' value='1'/>
+<enum name='kIOFBLinkDownspreadNone' value='0'/>
+<enum name='kIOFBLinkPreEmphasisLevel0' value='0'/>
+<enum name='kIOFBLinkPreEmphasisLevel1' value='1'/>
+<enum name='kIOFBLinkPreEmphasisLevel2' value='2'/>
+<enum name='kIOFBLinkPreEmphasisLevel3' value='3'/>
+<enum name='kIOFBLinkScramblerAlternate' value='1'/>
+<enum name='kIOFBLinkScramblerNormal' value='0'/>
+<enum name='kIOFBLinkVoltageLevel0' value='0'/>
+<enum name='kIOFBLinkVoltageLevel1' value='1'/>
+<enum name='kIOFBLinkVoltageLevel2' value='2'/>
+<enum name='kIOFBLinkVoltageLevel3' value='3'/>
+<enum name='kIOFBMCCSInterruptType' value='1835230067'/>
+<enum name='kIOFBMessageCallbacksVersionCurrent' value='2'/>
+<enum name='kIOFBOfflineInterruptType' value='1919249782'/>
+<enum name='kIOFBOnlineInterruptType' value='1633969184'/>
+<enum name='kIOFBRedGammaScaleAttribute' value='1735617650'/>
+<enum name='kIOFBServerConnectType' value='0'/>
+<enum name='kIOFBSharedConnectType' value='1'/>
+<enum name='kIOFBStop' value='1937010544'/>
+<enum name='kIOFBSynchronizeFlushWrites' value='2'/>
+<enum name='kIOFBSynchronizeWaitBeamExit' value='1'/>
+<enum name='kIOFBSystemAperture' value='0'/>
+<enum name='kIOFBUserRequestProbe' value='1'/>
+<enum name='kIOFBVBLInterruptType' value='1986161696'/>
+<enum name='kIOFBVariableRefreshRate' value='1987211839'/>
+<enum name='kIOFBWakeInterruptType' value='1987535211'/>
+<enum name='kIOFixedCLUTPixels' value='1'/>
+<enum name='kIOHSyncDisable' value='1'/>
+<enum name='kIOHardwareCursorAttribute' value='1668445042'/>
+<enum name='kIOHibernatePreviewActive' value='1'/>
+<enum name='kIOHibernatePreviewUpdates' value='2'/>
+<enum name='kIOInterlacedCEATiming' value='4'/>
+<enum name='kIOMaxPixelBits' value='64'/>
+<enum name='kIOMirrorAttribute' value='1835627122'/>
+<enum name='kIOMirrorDefault' value='1'/>
+<enum name='kIOMirrorDefaultAttribute' value='1836213350'/>
+<enum name='kIOMirrorForced' value='2'/>
+<enum name='kIOMirrorHWClipped' value='1073741824'/>
+<enum name='kIOMirrorIsMirrored' value='536870912'/>
+<enum name='kIOMirrorIsPrimary' value='-2147483648'/>
+<enum name='kIOMonoDirectPixels' value='3'/>
+<enum name='kIOMonoInverseDirectPixels' value='4'/>
+<enum name='kIONTSCTiming' value='8'/>
+<enum name='kIONoSeparateSyncControl' value='64'/>
+<enum name='kIOPALTiming' value='16'/>
+<enum name='kIOPixelEncodingNotSupported' value='0'/>
+<enum name='kIOPixelEncodingRGB444' value='1'/>
+<enum name='kIOPixelEncodingYCbCr420' value='8'/>
+<enum name='kIOPixelEncodingYCbCr422' value='4'/>
+<enum name='kIOPixelEncodingYCbCr444' value='2'/>
+<enum name='kIOPowerAttribute' value='1886353266'/>
+<enum name='kIOPowerStateAttribute' value='1886876275'/>
+<enum name='kIORGBDirectPixels' value='2'/>
+<enum name='kIORGBSignedDirectPixels' value='5'/>
+<enum name='kIORGBSignedFloatingPointPixels' value='6'/>
+<enum name='kIORangeBitsPerColorComponent10' value='4'/>
+<enum name='kIORangeBitsPerColorComponent12' value='8'/>
+<enum name='kIORangeBitsPerColorComponent16' value='16'/>
+<enum name='kIORangeBitsPerColorComponent6' value='1'/>
+<enum name='kIORangeBitsPerColorComponent8' value='2'/>
+<enum name='kIORangeBitsPerColorComponentNotSupported' value='0'/>
+<enum name='kIORangeColorimetryAdobeRGB' value='8'/>
+<enum name='kIORangeColorimetryBT2020' value='256'/>
+<enum name='kIORangeColorimetryBT2100' value='512'/>
+<enum name='kIORangeColorimetryBT601' value='64'/>
+<enum name='kIORangeColorimetryBT709' value='128'/>
+<enum name='kIORangeColorimetryDCIP3' value='4'/>
+<enum name='kIORangeColorimetryNativeRGB' value='1'/>
+<enum name='kIORangeColorimetryNotSupported' value='0'/>
+<enum name='kIORangeColorimetryWGRGB' value='32'/>
+<enum name='kIORangeColorimetrysRGB' value='2'/>
+<enum name='kIORangeColorimetryxvYCC' value='16'/>
+<enum name='kIORangeDynamicRangeDolbyNormalMode' value='4'/>
+<enum name='kIORangeDynamicRangeDolbyTunnelMode' value='8'/>
+<enum name='kIORangeDynamicRangeHDR10' value='2'/>
+<enum name='kIORangeDynamicRangeNotSupported' value='0'/>
+<enum name='kIORangeDynamicRangeSDR' value='1'/>
+<enum name='kIORangeDynamicRangeTraditionalGammaHDR' value='16'/>
+<enum name='kIORangePixelEncodingNotSupported' value='0'/>
+<enum name='kIORangePixelEncodingRGB444' value='1'/>
+<enum name='kIORangePixelEncodingYCbCr420' value='8'/>
+<enum name='kIORangePixelEncodingYCbCr422' value='4'/>
+<enum name='kIORangePixelEncodingYCbCr444' value='2'/>
+<enum name='kIORangeSupportsCompositeSync' value='4'/>
+<enum name='kIORangeSupportsInterlacedCEATiming' value='4'/>
+<enum name='kIORangeSupportsInterlacedCEATimingWithConfirm' value='8'/>
+<enum name='kIORangeSupportsSeparateSyncs' value='1'/>
+<enum name='kIORangeSupportsSignal_0700_0000' value='8'/>
+<enum name='kIORangeSupportsSignal_0700_0300' value='1'/>
+<enum name='kIORangeSupportsSignal_0714_0286' value='2'/>
+<enum name='kIORangeSupportsSignal_1000_0400' value='4'/>
+<enum name='kIORangeSupportsSyncOnGreen' value='2'/>
+<enum name='kIORangeSupportsVSyncSerration' value='8'/>
+<enum name='kIORegistryIterateParents' value='2'/>
+<enum name='kIORegistryIterateRecursively' value='1'/>
+<enum name='kIOScaleCanBorderInsetOnly' value='64'/>
+<enum name='kIOScaleCanDownSamplePixels' value='4'/>
+<enum name='kIOScaleCanRotate' value='32'/>
+<enum name='kIOScaleCanScaleInterlaced' value='8'/>
+<enum name='kIOScaleCanSupportInset' value='16'/>
+<enum name='kIOScaleCanUpSamplePixels' value='2'/>
+<enum name='kIOScaleInvertX' value='32'/>
+<enum name='kIOScaleInvertY' value='64'/>
+<enum name='kIOScaleRotate0' value='0'/>
+<enum name='kIOScaleRotate180' value='96'/>
+<enum name='kIOScaleRotate270' value='80'/>
+<enum name='kIOScaleRotate90' value='48'/>
+<enum name='kIOScaleRotateFlags' value='240'/>
+<enum name='kIOScaleStretchOnly' value='1'/>
+<enum name='kIOScaleStretchToFit' value='1'/>
+<enum name='kIOScaleSwapAxes' value='16'/>
+<enum name='kIOScalingInfoValid' value='1073741824'/>
+<enum name='kIOServiceInteractionAllowed' value='1'/>
+<enum name='kIOSyncOnBlue' value='8'/>
+<enum name='kIOSyncOnGreen' value='16'/>
+<enum name='kIOSyncOnRed' value='32'/>
+<enum name='kIOSyncPositivePolarity' value='1'/>
+<enum name='kIOSystemPowerAttribute' value='1936750450'/>
+<enum name='kIOTimingIDAppleNTSC_FF' value='232'/>
+<enum name='kIOTimingIDAppleNTSC_FFconv' value='236'/>
+<enum name='kIOTimingIDAppleNTSC_ST' value='230'/>
+<enum name='kIOTimingIDAppleNTSC_STconv' value='234'/>
+<enum name='kIOTimingIDApplePAL_FF' value='240'/>
+<enum name='kIOTimingIDApplePAL_FFconv' value='244'/>
+<enum name='kIOTimingIDApplePAL_ST' value='238'/>
+<enum name='kIOTimingIDApplePAL_STconv' value='242'/>
+<enum name='kIOTimingIDApple_0x0_0hz_Offline' value='550'/>
+<enum name='kIOTimingIDApple_1024x768_75hz' value='210'/>
+<enum name='kIOTimingIDApple_1152x870_75hz' value='220'/>
+<enum name='kIOTimingIDApple_512x384_60hz' value='130'/>
+<enum name='kIOTimingIDApple_560x384_60hz' value='135'/>
+<enum name='kIOTimingIDApple_640x400_67hz' value='145'/>
+<enum name='kIOTimingIDApple_640x480_67hz' value='140'/>
+<enum name='kIOTimingIDApple_640x818_75hz' value='165'/>
+<enum name='kIOTimingIDApple_640x870_75hz' value='160'/>
+<enum name='kIOTimingIDApple_832x624_75hz' value='170'/>
+<enum name='kIOTimingIDApple_FixedRateLCD' value='42'/>
+<enum name='kIOTimingIDFilmRate_48hz' value='410'/>
+<enum name='kIOTimingIDGTF_640x480_120hz' value='159'/>
+<enum name='kIOTimingIDInvalid' value='0'/>
+<enum name='kIOTimingIDSMPTE240M_60hz' value='400'/>
+<enum name='kIOTimingIDSony_1600x1024_76hz' value='500'/>
+<enum name='kIOTimingIDSony_1920x1080_60hz' value='510'/>
+<enum name='kIOTimingIDSony_1920x1080_72hz' value='520'/>
+<enum name='kIOTimingIDSony_1920x1200_76hz' value='540'/>
+<enum name='kIOTimingIDVESA_1024x768_60hz' value='190'/>
+<enum name='kIOTimingIDVESA_1024x768_70hz' value='200'/>
+<enum name='kIOTimingIDVESA_1024x768_75hz' value='204'/>
+<enum name='kIOTimingIDVESA_1024x768_85hz' value='208'/>
+<enum name='kIOTimingIDVESA_1152x864_75hz' value='215'/>
+<enum name='kIOTimingIDVESA_1280x1024_60hz' value='260'/>
+<enum name='kIOTimingIDVESA_1280x1024_75hz' value='262'/>
+<enum name='kIOTimingIDVESA_1280x1024_85hz' value='268'/>
+<enum name='kIOTimingIDVESA_1280x960_60hz' value='252'/>
+<enum name='kIOTimingIDVESA_1280x960_75hz' value='250'/>
+<enum name='kIOTimingIDVESA_1280x960_85hz' value='254'/>
+<enum name='kIOTimingIDVESA_1360x768_60hz' value='590'/>
+<enum name='kIOTimingIDVESA_1600x1200_60hz' value='280'/>
+<enum name='kIOTimingIDVESA_1600x1200_65hz' value='282'/>
+<enum name='kIOTimingIDVESA_1600x1200_70hz' value='284'/>
+<enum name='kIOTimingIDVESA_1600x1200_75hz' value='286'/>
+<enum name='kIOTimingIDVESA_1600x1200_80hz' value='288'/>
+<enum name='kIOTimingIDVESA_1600x1200_85hz' value='289'/>
+<enum name='kIOTimingIDVESA_1792x1344_60hz' value='296'/>
+<enum name='kIOTimingIDVESA_1792x1344_75hz' value='298'/>
+<enum name='kIOTimingIDVESA_1856x1392_60hz' value='300'/>
+<enum name='kIOTimingIDVESA_1856x1392_75hz' value='302'/>
+<enum name='kIOTimingIDVESA_1920x1440_60hz' value='304'/>
+<enum name='kIOTimingIDVESA_1920x1440_75hz' value='306'/>
+<enum name='kIOTimingIDVESA_640x480_60hz' value='150'/>
+<enum name='kIOTimingIDVESA_640x480_72hz' value='152'/>
+<enum name='kIOTimingIDVESA_640x480_75hz' value='154'/>
+<enum name='kIOTimingIDVESA_640x480_85hz' value='158'/>
+<enum name='kIOTimingIDVESA_800x600_56hz' value='180'/>
+<enum name='kIOTimingIDVESA_800x600_60hz' value='182'/>
+<enum name='kIOTimingIDVESA_800x600_72hz' value='184'/>
+<enum name='kIOTimingIDVESA_800x600_75hz' value='186'/>
+<enum name='kIOTimingIDVESA_800x600_85hz' value='188'/>
+<enum name='kIOTimingIDVESA_848x480_60hz' value='570'/>
+<enum name='kIOTriStateSyncs' value='128'/>
+<enum name='kIOVRAMSaveAttribute' value='1987212150'/>
+<enum name='kIOVSyncDisable' value='2'/>
+<enum name='kIOWSAA_Accelerated' value='1'/>
+<enum name='kIOWSAA_DeferEnd' value='512'/>
+<enum name='kIOWSAA_DeferStart' value='256'/>
+<enum name='kIOWSAA_DriverOpen' value='5'/>
+<enum name='kIOWSAA_From_Accelerated' value='2'/>
+<enum name='kIOWSAA_Hibernate' value='4'/>
+<enum name='kIOWSAA_NonConsoleDevice' value='1024'/>
+<enum name='kIOWSAA_Reserved' value='-268435456'/>
+<enum name='kIOWSAA_Sleep' value='4'/>
+<enum name='kIOWSAA_StateMask' value='15'/>
+<enum name='kIOWSAA_To_Accelerated' value='3'/>
+<enum name='kIOWSAA_Transactional' value='16'/>
+<enum name='kIOWSAA_Unaccelerated' value='0'/>
+<enum name='kIOWindowServerActiveAttribute' value='2004054646'/>
+<enum name='kInvertingEncodedPixel' value='4'/>
+<enum name='kInvertingEncoding' value='1'/>
+<enum name='kInvertingEncodingShift' value='2'/>
+<enum name='kOrConnections' value='268435454'/>
+<enum name='kSetCLUTByValue' value='1'/>
+<enum name='kSetCLUTImmediately' value='2'/>
+<enum name='kSetCLUTWithLuminance' value='4'/>
+<enum name='kTransparentEncodedPixel' value='1'/>
+<enum name='kTransparentEncoding' value='0'/>
+<enum name='kTransparentEncodingShift' value='0'/>
+<function name='IOBSDNameMatching'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='*'/>
+<retval type='^{__CFDictionary=}'/>
+</function>
+<function name='IOCatalogueGetData'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='^*'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOCatalogueModuleLoaded'>
+<arg type='I'/>
+<arg type='*'/>
+<retval type='i'/>
+</function>
+<function name='IOCatalogueReset'>
+<arg type='I'/>
+<arg type='I'/>
+<retval type='i'/>
+</function>
+<function name='IOCatalogueSendData'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='*'/>
+<arg type='I'/>
+<retval type='i'/>
+</function>
+<function name='IOCatalogueTerminate'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='*'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectAddClient'>
+<arg type='I'/>
+<arg type='I'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectAddRef'>
+<arg type='I'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectCallAsyncMethod'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='^Q'/>
+<arg type='I'/>
+<arg type='^Q'/>
+<arg type='I'/>
+<arg type='^v'/>
+<arg type='L' type64='Q'/>
+<arg type='^Q'/>
+<arg type='^I'/>
+<arg type='^v'/>
+<arg type='^I' type64='^Q'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectCallAsyncScalarMethod'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='^Q'/>
+<arg type='I'/>
+<arg type='^Q'/>
+<arg type='I'/>
+<arg type='^Q'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectCallAsyncStructMethod'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='^Q'/>
+<arg type='I'/>
+<arg type='^v'/>
+<arg type='L' type64='Q'/>
+<arg type='^v'/>
+<arg type='^I' type64='^Q'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectCallMethod'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='^Q'/>
+<arg type='I'/>
+<arg type='^v'/>
+<arg type='L' type64='Q'/>
+<arg type='^Q'/>
+<arg type='^I'/>
+<arg type='^v'/>
+<arg type='^I' type64='^Q'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectCallScalarMethod'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='^Q'/>
+<arg type='I'/>
+<arg type='^Q'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectCallStructMethod'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='^v'/>
+<arg type='L' type64='Q'/>
+<arg type='^v'/>
+<arg type='^I' type64='^Q'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectGetService'>
+<arg type='I'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectMapMemory'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='^I' type64='^Q'/>
+<arg type='^I' type64='^Q'/>
+<arg type='L' type64='I'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectMapMemory64'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='^Q'/>
+<arg type='^Q'/>
+<arg type='L' type64='I'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectRelease'>
+<arg type='I'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectSetCFProperties'>
+<arg type='I'/>
+<arg type='@'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectSetCFProperty'>
+<arg type='I'/>
+<arg type='^{__CFString=}'/>
+<arg type='@'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectSetNotificationPort'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='L' type64='Q'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectTrap0'>
+<arg type='I'/>
+<arg type='I'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectTrap1'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='L' type64='Q'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectTrap2'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='L' type64='Q'/>
+<arg type='L' type64='Q'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectTrap3'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='L' type64='Q'/>
+<arg type='L' type64='Q'/>
+<arg type='L' type64='Q'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectTrap4'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='L' type64='Q'/>
+<arg type='L' type64='Q'/>
+<arg type='L' type64='Q'/>
+<arg type='L' type64='Q'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectTrap5'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='L' type64='Q'/>
+<arg type='L' type64='Q'/>
+<arg type='L' type64='Q'/>
+<arg type='L' type64='Q'/>
+<arg type='L' type64='Q'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectTrap6'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='L' type64='Q'/>
+<arg type='L' type64='Q'/>
+<arg type='L' type64='Q'/>
+<arg type='L' type64='Q'/>
+<arg type='L' type64='Q'/>
+<arg type='L' type64='Q'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectUnmapMemory'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='I' type64='Q'/>
+<retval type='i'/>
+</function>
+<function name='IOConnectUnmapMemory64'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='Q'/>
+<retval type='i'/>
+</function>
+<function name='IOCreateReceivePort'>
+<arg type='I'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IODispatchCalloutFromMessage'>
+<arg type='^v'/>
+<arg type='^{_mach_msg_header_t=IIIIIi}'/>
+<arg type='^v'/>
+</function>
+<function name='IODisplayCommitParameters'>
+<arg type='I'/>
+<arg type='L' type64='I'/>
+<retval type='i'/>
+</function>
+<function name='IODisplayCopyFloatParameters'>
+<arg type='I'/>
+<arg type='L' type64='I'/>
+<arg type='^^{__CFDictionary}'/>
+<retval type='i'/>
+</function>
+<function name='IODisplayCopyParameters'>
+<arg type='I'/>
+<arg type='L' type64='I'/>
+<arg type='^^{__CFDictionary}'/>
+<retval type='i'/>
+</function>
+<function name='IODisplayCreateInfoDictionary'>
+<arg type='I'/>
+<arg type='L' type64='I'/>
+<retval already_retained='true' type='^{__CFDictionary=}'/>
+</function>
+<function name='IODisplayForFramebuffer'>
+<arg type='I'/>
+<arg type='L' type64='I'/>
+<retval type='I'/>
+</function>
+<function name='IODisplayGetFloatParameter'>
+<arg type='I'/>
+<arg type='L' type64='I'/>
+<arg type='^{__CFString=}'/>
+<arg type='^f'/>
+<retval type='i'/>
+</function>
+<function name='IODisplayGetIntegerRangeParameter'>
+<arg type='I'/>
+<arg type='L' type64='I'/>
+<arg type='^{__CFString=}'/>
+<arg type='^i'/>
+<arg type='^i'/>
+<arg type='^i'/>
+<retval type='i'/>
+</function>
+<function name='IODisplayMatchDictionaries'>
+<arg type='^{__CFDictionary=}'/>
+<arg type='^{__CFDictionary=}'/>
+<arg type='L' type64='I'/>
+<retval type='l' type64='i'/>
+</function>
+<function name='IODisplaySetFloatParameter'>
+<arg type='I'/>
+<arg type='L' type64='I'/>
+<arg type='^{__CFString=}'/>
+<arg type='f'/>
+<retval type='i'/>
+</function>
+<function name='IODisplaySetIntegerParameter'>
+<arg type='I'/>
+<arg type='L' type64='I'/>
+<arg type='^{__CFString=}'/>
+<arg type='l' type64='i'/>
+<retval type='i'/>
+</function>
+<function name='IODisplaySetParameters'>
+<arg type='I'/>
+<arg type='L' type64='I'/>
+<arg type='^{__CFDictionary=}'/>
+<retval type='i'/>
+</function>
+<function name='IOFBAcknowledgeNotification'>
+<arg type='^v'/>
+<retval type='i'/>
+</function>
+<function name='IOFBAcknowledgePM'>
+<arg type='I'/>
+<retval type='i'/>
+</function>
+<function name='IOFBBeamPosition'>
+<arg type='^v'/>
+<arg type='L' type64='I'/>
+<arg type='^i'/>
+<retval type='i'/>
+</function>
+<function name='IOFBBlitSurfaceCopy'>
+<arg type='^v'/>
+<arg type='L' type64='I'/>
+<arg type='^v'/>
+<arg type='^{_IOAccelDeviceRegion=I{?=ssss}[0{?=ssss}]}'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<retval type='i'/>
+</function>
+<function name='IOFBBlitSurfaceSurfaceCopy'>
+<arg type='^v'/>
+<arg type='L' type64='I'/>
+<arg type='^v'/>
+<arg type='^v'/>
+<arg type='^{_IOAccelDeviceRegion=I{?=ssss}[0{?=ssss}]}'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<retval type='i'/>
+</function>
+<function name='IOFBBlitVRAMCopy'>
+<arg type='^v'/>
+<arg type='i'/>
+<arg type='i'/>
+<arg type='i'/>
+<arg type='i'/>
+<arg type='i'/>
+<arg type='i'/>
+<arg type='L' type64='I'/>
+<retval type='i'/>
+</function>
+<function name='IOFBBurstWrite32'>
+<arg type='^v'/>
+<arg type='^v'/>
+<arg type='^v'/>
+<arg type='^v'/>
+<arg type='^v'/>
+<arg type='^v'/>
+<arg type='^v'/>
+<arg type='^v'/>
+</function>
+<function name='IOFBCommitMemory'>
+<arg type='^v'/>
+<arg type='I' type64='Q'/>
+<arg type='I' type64='Q'/>
+<arg type='L' type64='I'/>
+<arg type='^^v'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOFBCreateDisplayModeDictionary'>
+<arg type='I'/>
+<arg type='l' type64='i'/>
+<retval already_retained='true' type='^{__CFDictionary=}'/>
+</function>
+<function name='IOFBCreateSharedCursor'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='I'/>
+<retval type='i'/>
+</function>
+<function name='IOFBDispatchMessageNotification'>
+<arg type='I'/>
+<arg type='^{_mach_msg_header_t=IIIIIi}'/>
+<arg type='L' type64='I'/>
+<arg type='^{IOFBMessageCallbacks=^?^?^?^?}'/>
+<arg type='^v'/>
+<retval type='i'/>
+</function>
+<function name='IOFBGetAttributeForFramebuffer'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='L' type64='I'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOFBGetConnectState'>
+<arg type='I'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOFBGetCurrentDisplayModeAndDepth'>
+<arg type='I'/>
+<arg type='^i'/>
+<arg type='^i'/>
+<retval type='i'/>
+</function>
+<function name='IOFBGetDefaultDisplayMode'>
+<arg type='I'/>
+<arg type='^i'/>
+<arg type='^i'/>
+<retval type='i'/>
+</function>
+<function name='IOFBGetDisplayModeCount'>
+<arg type='I'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOFBGetDisplayModeInformation'>
+<arg type='I'/>
+<arg type='l' type64='i'/>
+<arg type='^{IODisplayModeInformation=IIIiISS[3L]}' type64='^{IODisplayModeInformation=IIIiISS[3I]}'/>
+<retval type='i'/>
+</function>
+<function name='IOFBGetDisplayModes'>
+<arg type='I'/>
+<arg type='L' type64='I'/>
+<arg type='^i'/>
+<retval type='i'/>
+</function>
+<function name='IOFBGetFramebufferInformationForAperture'>
+<arg type='I'/>
+<arg type='l' type64='i'/>
+<arg type='^{IOFramebufferInformation=IIIIIIII[4L]}' type64='^{IOFramebufferInformation=IIIIIIII[4I]}'/>
+<retval type='i'/>
+</function>
+<function name='IOFBGetFramebufferOffsetForAperture'>
+<arg type='I'/>
+<arg type='l' type64='i'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOFBGetNotificationMachPort'>
+<arg type='I'/>
+<retval type='I'/>
+</function>
+<function name='IOFBGetPixelFormat'>
+<arg type='I'/>
+<arg type='l' type64='i'/>
+<arg type='l' type64='i'/>
+<arg type='l' type64='i'/>
+<arg type='^[64c]'/>
+<retval type='i'/>
+</function>
+<function name='IOFBGetPixelFormats'>
+<arg type='I'/>
+<arg type='l' type64='i'/>
+<arg type='l' type64='i'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOFBGetPixelInfoDictionary'>
+<arg type='^{__CFDictionary=}'/>
+<arg type='l' type64='i'/>
+<arg type='l' type64='i'/>
+<retval type='^{__CFDictionary=}'/>
+</function>
+<function name='IOFBGetPixelInformation'>
+<arg type='I'/>
+<arg type='l' type64='i'/>
+<arg type='l' type64='i'/>
+<arg type='l' type64='i'/>
+<arg type='^{IOPixelInformation=IIIIII[16L][64c]III[2L]}' type64='^{IOPixelInformation=IIIIII[16I][64c]III[2I]}'/>
+<retval type='i'/>
+</function>
+<function name='IOFBMemoryCopy'>
+<arg type='^v'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<arg type='^i'/>
+<retval type='i'/>
+</function>
+<function name='IOFBReleaseMemory'>
+<arg type='^v'/>
+<arg type='^v'/>
+<retval type='i'/>
+</function>
+<function name='IOFBSet256To888Table'>
+<arg type='I'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOFBSet444To555Table'>
+<arg type='I'/>
+<arg type='*'/>
+<retval type='i'/>
+</function>
+<function name='IOFBSet555To444Table'>
+<arg type='I'/>
+<arg type='*'/>
+<retval type='i'/>
+</function>
+<function name='IOFBSet888To256Table'>
+<arg type='I'/>
+<arg type='*'/>
+<retval type='i'/>
+</function>
+<function name='IOFBSetAttributeForFramebuffer'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<retval type='i'/>
+</function>
+<function name='IOFBSetBounds'>
+<arg type='I'/>
+<arg type='^{IOGBounds=ssss}'/>
+<retval type='i'/>
+</function>
+<function name='IOFBSetBurstRef'>
+<arg type='^v'/>
+</function>
+<function name='IOFBSetCLUT'>
+<arg type='I'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<arg type='^{IOColorEntry=SSSS}'/>
+<retval type='i'/>
+</function>
+<function name='IOFBSetCursorPosition'>
+<arg type='I'/>
+<arg type='l' type64='q'/>
+<arg type='l' type64='q'/>
+<retval type='i'/>
+</function>
+<function name='IOFBSetCursorVisible'>
+<arg type='I'/>
+<arg type='i'/>
+<retval type='i'/>
+</function>
+<function name='IOFBSetDisplayModeAndDepth'>
+<arg type='I'/>
+<arg type='l' type64='i'/>
+<arg type='l' type64='i'/>
+<retval type='i'/>
+</function>
+<function name='IOFBSetGamma'>
+<arg type='I'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<arg type='^v'/>
+<retval type='i'/>
+</function>
+<function name='IOFBSetNewCursor'>
+<arg type='I'/>
+<arg type='^v'/>
+<arg type='l' type64='i'/>
+<arg type='L' type64='I'/>
+<retval type='i'/>
+</function>
+<function name='IOFBSetStartupDisplayModeAndDepth'>
+<arg type='I'/>
+<arg type='l' type64='i'/>
+<arg type='l' type64='i'/>
+<retval type='i'/>
+</function>
+<function name='IOFBSetVirtualBounds'>
+<arg type='I'/>
+<arg type='^{IOGBounds=ssss}'/>
+<arg type='^{IOGBounds=ssss}'/>
+<retval type='i'/>
+</function>
+<function name='IOFBSetupFIFOBurst'>
+<arg type='^v'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<arg type='^^v'/>
+<retval type='i'/>
+</function>
+<function name='IOFBSynchronize'>
+<arg type='^v'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<arg type='L' type64='I'/>
+<retval type='i'/>
+</function>
+<function name='IOFBWaitForCompletion'>
+<arg type='^v'/>
+<arg type='l' type64='i'/>
+<retval type='i'/>
+</function>
+<function name='IOFramebufferOpen'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOIteratorIsValid'>
+<arg type='I'/>
+<retval type='i' type64='I'/>
+</function>
+<function name='IOIteratorNext'>
+<arg type='I'/>
+<retval type='I'/>
+</function>
+<function name='IOIteratorReset'>
+<arg type='I'/>
+</function>
+<function name='IOKitGetBusyState'>
+<arg type='I'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOKitWaitQuiet'>
+<arg type='I'/>
+<arg type='^{mach_timespec=Ii}'/>
+<retval type='i'/>
+</function>
+<function name='IOMasterPort'>
+<arg type='I'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IONotificationPortCreate'>
+<arg type='I'/>
+<retval already_retained='true' type='^{IONotificationPort=}'/>
+</function>
+<function name='IONotificationPortDestroy'>
+<arg type='^{IONotificationPort=}'/>
+</function>
+<function name='IONotificationPortGetMachPort'>
+<arg type='^{IONotificationPort=}'/>
+<retval type='I'/>
+</function>
+<function name='IONotificationPortGetRunLoopSource'>
+<arg type='^{IONotificationPort=}'/>
+<retval type='^{__CFRunLoopSource=}'/>
+</function>
+<function name='IONotificationPortSetDispatchQueue'>
+<arg type='^{IONotificationPort=}'/>
+<arg type='@'/>
+</function>
+<function name='IONotificationPortSetImportanceReceiver'>
+<arg type='^{IONotificationPort=}'/>
+<retval type='i'/>
+</function>
+<function name='IOObjectConformsTo'>
+<arg type='I'/>
+<arg type='*'/>
+<retval type='i' type64='I'/>
+</function>
+<function name='IOObjectCopyBundleIdentifierForClass'>
+<arg type='^{__CFString=}'/>
+<retval already_retained='true' type='^{__CFString=}'/>
+</function>
+<function name='IOObjectCopyClass'>
+<arg type='I'/>
+<retval already_retained='true' type='^{__CFString=}'/>
+</function>
+<function name='IOObjectCopySuperclassForClass'>
+<arg type='^{__CFString=}'/>
+<retval already_retained='true' type='^{__CFString=}'/>
+</function>
+<function name='IOObjectGetClass'>
+<arg type='I'/>
+<arg type='*'/>
+<retval type='i'/>
+</function>
+<function name='IOObjectGetKernelRetainCount'>
+<arg type='I'/>
+<retval type='I'/>
+</function>
+<function name='IOObjectGetRetainCount'>
+<arg type='I'/>
+<retval type='I'/>
+</function>
+<function name='IOObjectGetUserRetainCount'>
+<arg type='I'/>
+<retval type='I'/>
+</function>
+<function name='IOObjectIsEqualTo'>
+<arg type='I'/>
+<arg type='I'/>
+<retval type='i' type64='I'/>
+</function>
+<function name='IOObjectRelease'>
+<arg type='I'/>
+<retval type='i'/>
+</function>
+<function name='IOObjectRetain'>
+<arg type='I'/>
+<retval type='i'/>
+</function>
+<function name='IOOpenFirmwarePathMatching'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='*'/>
+<retval type='^{__CFDictionary=}'/>
+</function>
+<function name='IOPSAllocateBlitEngine'>
+<arg type='I'/>
+<arg type='^^v'/>
+<arg type='^i'/>
+<retval type='i'/>
+</function>
+<function name='IOPSBlitCopy'>
+<arg type='^v'/>
+<arg type='i'/>
+<arg type='i'/>
+<arg type='i'/>
+<arg type='i'/>
+<arg type='i'/>
+<arg type='i'/>
+<retval type='i'/>
+</function>
+<function name='IOPSBlitDeallocate'>
+<arg type='^v'/>
+<retval type='i'/>
+</function>
+<function name='IOPSBlitFill'>
+<arg type='^v'/>
+<arg type='i'/>
+<arg type='i'/>
+<arg type='i'/>
+<arg type='i'/>
+<arg type='i'/>
+<retval type='i'/>
+</function>
+<function name='IOPSBlitIdle'>
+<arg type='^v'/>
+<retval type='i'/>
+</function>
+<function name='IOPSBlitInvert'>
+<arg type='^v'/>
+<arg type='i'/>
+<arg type='i'/>
+<arg type='i'/>
+<arg type='i'/>
+<retval type='i'/>
+</function>
+<function name='IOPSBlitReset'>
+<arg type='^v'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryCreateIterator'>
+<arg type='I'/>
+<arg type='*'/>
+<arg type='L' type64='I'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryEntryCopyFromPath'>
+<arg type='I'/>
+<arg type='^{__CFString=}'/>
+<retval type='I'/>
+</function>
+<function name='IORegistryEntryCopyPath'>
+<arg type='I'/>
+<arg type='*'/>
+<retval already_retained='true' type='^{__CFString=}'/>
+</function>
+<function name='IORegistryEntryCreateCFProperties'>
+<arg type='I'/>
+<arg type='^^{__CFDictionary}'/>
+<arg type='^{__CFAllocator=}'/>
+<arg type='L' type64='I'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryEntryCreateCFProperty'>
+<arg type='I'/>
+<arg type='^{__CFString=}'/>
+<arg type='^{__CFAllocator=}'/>
+<arg type='L' type64='I'/>
+<retval already_retained='true' type='@'/>
+</function>
+<function name='IORegistryEntryCreateIterator'>
+<arg type='I'/>
+<arg type='*'/>
+<arg type='L' type64='I'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryEntryFromPath'>
+<arg type='I'/>
+<arg type='*'/>
+<retval type='I'/>
+</function>
+<function name='IORegistryEntryGetChildEntry'>
+<arg type='I'/>
+<arg type='*'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryEntryGetChildIterator'>
+<arg type='I'/>
+<arg type='*'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryEntryGetLocationInPlane'>
+<arg type='I'/>
+<arg type='*'/>
+<arg type='*'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryEntryGetName'>
+<arg type='I'/>
+<arg type='*'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryEntryGetNameInPlane'>
+<arg type='I'/>
+<arg type='*'/>
+<arg type='*'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryEntryGetParentEntry'>
+<arg type='I'/>
+<arg type='*'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryEntryGetParentIterator'>
+<arg type='I'/>
+<arg type='*'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryEntryGetPath'>
+<arg type='I'/>
+<arg type='*'/>
+<arg type='*'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryEntryGetProperty'>
+<arg type='I'/>
+<arg type='*'/>
+<arg type='*'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryEntryGetRegistryEntryID'>
+<arg type='I'/>
+<arg type='^Q'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryEntryIDMatching'>
+<arg type='Q'/>
+<retval type='^{__CFDictionary=}'/>
+</function>
+<function name='IORegistryEntryInPlane'>
+<arg type='I'/>
+<arg type='*'/>
+<retval type='i' type64='I'/>
+</function>
+<function name='IORegistryEntrySearchCFProperty'>
+<arg type='I'/>
+<arg type='*'/>
+<arg type='^{__CFString=}'/>
+<arg type='^{__CFAllocator=}'/>
+<arg type='L' type64='I'/>
+<retval type='@'/>
+</function>
+<function name='IORegistryEntrySetCFProperties'>
+<arg type='I'/>
+<arg type='@'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryEntrySetCFProperty'>
+<arg type='I'/>
+<arg type='^{__CFString=}'/>
+<arg type='@'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryGetRootEntry'>
+<arg type='I'/>
+<retval type='I'/>
+</function>
+<function name='IORegistryIteratorEnterEntry'>
+<arg type='I'/>
+<retval type='i'/>
+</function>
+<function name='IORegistryIteratorExitEntry'>
+<arg type='I'/>
+<retval type='i'/>
+</function>
+<function name='IOServiceAddInterestNotification'>
+<arg type='^{IONotificationPort=}'/>
+<arg type='I'/>
+<arg type='*'/>
+<arg function_pointer='true' type='^?'>
+<arg type='^v'/>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='^v'/>
+<retval type='v'/>
+</arg>
+<arg type='^v'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOServiceAddMatchingNotification'>
+<arg type='^{IONotificationPort=}'/>
+<arg type='*'/>
+<arg type='^{__CFDictionary=}'/>
+<arg function_pointer='true' type='^?'>
+<arg type='^v'/>
+<arg type='I'/>
+<retval type='v'/>
+</arg>
+<arg type='^v'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOServiceAddNotification'>
+<arg type='I'/>
+<arg type='*'/>
+<arg type='^{__CFDictionary=}'/>
+<arg type='I'/>
+<arg type='L' type64='Q'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOServiceAuthorize'>
+<arg type='I'/>
+<arg type='I'/>
+<retval type='i'/>
+</function>
+<function name='IOServiceClose'>
+<arg type='I'/>
+<retval type='i'/>
+</function>
+<function name='IOServiceGetBusyState'>
+<arg type='I'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOServiceGetMatchingService'>
+<arg type='I'/>
+<arg type='^{__CFDictionary=}'/>
+<retval type='I'/>
+</function>
+<function name='IOServiceGetMatchingServices'>
+<arg type='I'/>
+<arg type='^{__CFDictionary=}'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOServiceMatchPropertyTable'>
+<arg type='I'/>
+<arg type='^{__CFDictionary=}'/>
+<arg type='^i' type64='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOServiceMatching'>
+<arg type='*'/>
+<retval type='^{__CFDictionary=}'/>
+</function>
+<function name='IOServiceNameMatching'>
+<arg type='*'/>
+<retval type='^{__CFDictionary=}'/>
+</function>
+<function name='IOServiceOFPathToBSDName'>
+<arg type='I'/>
+<arg type='*'/>
+<arg type='*'/>
+<retval type='i'/>
+</function>
+<function name='IOServiceOpen'>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='I'/>
+<arg type='^I'/>
+<retval type='i'/>
+</function>
+<function name='IOServiceOpenAsFileDescriptor'>
+<arg type='I'/>
+<arg type='i'/>
+<retval type='i'/>
+</function>
+<function name='IOServiceRequestProbe'>
+<arg type='I'/>
+<arg type='I'/>
+<retval type='i'/>
+</function>
+<function name='IOServiceWaitQuiet'>
+<arg type='I'/>
+<arg type='^{mach_timespec=Ii}'/>
+<retval type='i'/>
+</function>
+<function name='OSGetNotificationFromMessage'>
+<arg type='^{_mach_msg_header_t=IIIIIi}'/>
+<arg type='I'/>
+<arg type='^I'/>
+<arg type='^I' type64='^Q'/>
+<arg type='^^v'/>
+<arg type='^I' type64='^Q'/>
+<retval type='i'/>
+</function>
+</signatures>
