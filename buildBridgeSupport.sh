@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export BUNDLESUPPORT=".bridgesupport"
+export BRIDGESUPPORT=".bridgesupport"
 export TOOLCHAINS_DIR="/Applications/Xcode.app/Contents/Developer/Toolchains"
 export WORKING_DIR=`pwd`
 
@@ -25,9 +25,9 @@ gen_bridge_metadata -c "-l/System/Library/Frameworks/IOKit.framework/IOKit
                         -I/System/Library/Frameworks/IOKit.framework/Headers" \
                         /System/Library/Frameworks/IOKit.framework/Headers/graphics/IOGraphicsLib.h \
                         /System/Library/Frameworks/IOKit.framework/Headers/IOKitLib.h  \
-                        /System/Library/Frameworks/IOKit.framework/Headers/graphics/IOGraphicsTypes.h > "$BUNDLESUPPORT"
+                        /System/Library/Frameworks/IOKit.framework/Headers/graphics/IOGraphicsTypes.h > "$BRIDGESUPPORT"
 
 # delete item with weird signature
 # https://stackoverflow.com/questions/19456518/invalid-command-code-despite-escaping-periods-using-sed
-sed -i "" -e  "/name='IOTimingInformation'/d" "./$BUNDLESUPPORT"
+sed -i "" -e  "/name='IOTimingInformation'/d" "./$BRIDGESUPPORT"
 
