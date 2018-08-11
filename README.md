@@ -1,6 +1,6 @@
 # Installation
 
-`git clone thisrepo`
+`git clone https://github.com/thismachinechills/brightness.git`
 
 ## Prerequisites
 
