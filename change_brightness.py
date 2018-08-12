@@ -1,26 +1,17 @@
-from time import sleep
-from typing import Dict, Callable, List
-from subprocess import getstatusoutput
 import platform
+from subprocess import getstatusoutput
+from time import sleep
+from typing import List, Dict, Callable
 
-import numpy as np
-import face_recognition
-import cv2
 import click
+import cv2
+import face_recognition
+import numpy as np
 
-HID_IDLE_CMD = "ioreg -c IOHIDSystem | awk '/HIDIdleTime/ {print $NF/1000000000; exit}'"
-BRIDGESUPPORT_FILE = ".bridgesupport"
-IOKIT_FRAMEWORK = "/System/Library/Frameworks/IOKit.framework"
-DISPLAY_CONNECT = b"IODisplayConnect"
-kIODisplayBrightnessKey = "brightness"
+from common import NO_BRIGHTNESS, DEFAULT_CAPTURE_DEV, DEFAULT_FRAMES, DEFAULT_IDLE_MIN_SEC, STATUS_SUCCESS, \
+    BRIDGESUPPORT_FILE, IOKIT_FRAMEWORK, DISPLAY_CONNECT, kIODisplayBrightnessKey
 
-STATUS_SUCCESS = 0
-NO_IDLE = 0.0
-NO_BRIGHTNESS = 0
-
-DEFAULT_CAPTURE_DEV = 0
-FRAMES = 3
-IDLE_MIN_SEC = 10
+_PLATFORM = platform.platform()
 
 
 def import_iokit(iokit_location: str = IOKIT_FRAMEWORK, namespace: Dict[str, Callable] = None):
@@ -35,61 +26,30 @@ def import_iokit(iokit_location: str = IOKIT_FRAMEWORK, namespace: Dict[str, Cal
                             objc.pathForFramework(iokit_location))
 
 
-_platform = platform.platform()
-
-if 'Darwin' in _platform:
+if 'Darwin' in _PLATFORM:
+    _PLATFORM = 'Darwin'
     from CoreFoundation import CFStringCreateWithCString, CFRelease, kCFStringEncodingASCII
     import objc
 
     import_iokit()
-    _platform = 'Darwin'
 
-elif 'Windows' in _platform:
+elif 'Windows' in _PLATFORM:
+    _PLATFORM = 'Windows'
     import wmi
-    _platform = 'Windows'
 
-elif 'Linux' in _platform:
+
+elif 'Linux' in _PLATFORM:
+    _PLATFORM = 'Linux'
     status, output = getstatusoutput("which xbacklight")
 
     if status != STATUS_SUCCESS:
         raise Exception("Please install xbacklight.")
 
-    _platform = 'Linux'
 
 else:
     raise Exception('Unknown host platform. This works on macOS, Windows and Linux.')
 
-
-def get_mac_idle() -> float:
-    status, hid_idle_seconds = getstatusoutput(HID_IDLE_CMD)
-
-    if status != STATUS_SUCCESS:
-        return NO_IDLE
-
-    return float(hid_idle_seconds)
-
-
-def get_linux_idle() -> float:
-    status, idle = getstatusoutput("xprintidle")
-
-    if status != STATUS_SUCCESS:
-        return NO_IDLE
-
-    return float(idle)
-
-
-IDLE_FUNCS: Dict[str, Callable[[], float]] = {
-    'Darwin': get_mac_idle,
-    'Linux': get_linux_idle,
-    'Windows': lambda x: NO_IDLE
-}
-
-
-def get_idle() -> float:
-    return IDLE_FUNCS[_platform]()
-
-# def get_brightness() -> float:
-#     IODisplayGetFloatParameter(service, 0, kIODisplayBrightnessKey, brightness)
+from idle import IDLE_FUNCS
 
 
 def set_brightness_mac(brightness: int) -> int:
@@ -120,11 +80,15 @@ BRIGHTNESS_FUNCS: Dict[str, Callable[[int], int]] = {
 }
 
 
+def get_idle() -> float:
+    return IDLE_FUNCS[_PLATFORM]()
+
+
 def set_brightness(brightness: int) -> int:
-    return BRIGHTNESS_FUNCS[_platform](brightness)
+    return BRIGHTNESS_FUNCS[_PLATFORM](brightness)
 
 
-def get_snapshots(capture_device: int = DEFAULT_CAPTURE_DEV, frames: int = FRAMES) -> List[np.array]:
+def get_snapshots(capture_device: int = DEFAULT_CAPTURE_DEV, frames: int = DEFAULT_FRAMES) -> List[np.array]:
     cam = cv2.VideoCapture(capture_device)
 
     # I've tried this across several Macs: Often, the first frame that is captured
@@ -141,8 +105,8 @@ def contains_face(frame: np.array) -> bool:
 
 def detect_and_adjust(capture_device: int,
                       brightness: int = NO_BRIGHTNESS,
-                      idle_minimum: float = IDLE_MIN_SEC,
-                      frames: int = FRAMES) -> float:
+                      idle_minimum: float = DEFAULT_IDLE_MIN_SEC,
+                      frames: int = DEFAULT_FRAMES) -> float:
     """
     Detect if the system is idle, if it is, then see if we can
     capture a face from the given capture_device.
@@ -180,10 +144,10 @@ def detect_and_adjust(capture_device: int,
               type=click.types.IntRange(0, 100),
               help="Screen brightness between 0 and 100.")
 @click.option('-i', '--idle',
-              default=IDLE_MIN_SEC, show_default=True,
+              default=DEFAULT_IDLE_MIN_SEC, show_default=True,
               help="Seconds between inactivtiy and facial recognition.")
 @click.option('-f', '--frames',
-              default=FRAMES, show_default=True,
+              default=DEFAULT_FRAMES, show_default=True,
               help="Number of frames to capture in succession. \n"
                    "Increase this value if you're getting false negatives")
 @click.option('-s', '--step', is_flag=True, help='Enable stepping.')
