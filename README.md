@@ -72,5 +72,5 @@ By submitting a contribution, you agree that your modifications can be distribut
 # License
 See `LICENSE`.
  
-## Alternative Licenses
+## Alternative License
 Please contact me if you'd like to use this software under another license.
