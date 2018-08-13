@@ -11,6 +11,8 @@ import numpy as np
 from common import NO_BRIGHTNESS, DEFAULT_CAPTURE_DEV, DEFAULT_FRAMES, DEFAULT_IDLE_MIN_SEC, STATUS_SUCCESS, \
     BRIDGESUPPORT_FILE, IOKIT_FRAMEWORK, DISPLAY_CONNECT, kIODisplayBrightnessKey, STATUS_FAILURE
 
+from idle import IDLE_FUNCS
+
 _PLATFORM = platform.platform()
 
 
@@ -32,12 +34,14 @@ if 'Darwin' in _PLATFORM:
     import objc
 
     import_iokit()
-    from ctypes import CDLL, c_int, c_double, c_void_p
+
+    from ctypes import CDLL, c_int, c_double
 
     CoreDisplay = CDLL("/System/Library/Frameworks/CoreDisplay.framework/CoreDisplay")
     CoreDisplay.CoreDisplay_Display_SetUserBrightness.argtypes = [c_int, c_double]
     CoreDisplay.CoreDisplay_Display_GetUserBrightness.argtypes = [c_int]
     CoreDisplay.CoreDisplay_Display_GetUserBrightness.restype = c_double
+
 
     def set_brightness_coredisplay(display: int, brightness: int) -> int:
         brightness /= 100
@@ -49,6 +53,16 @@ if 'Darwin' in _PLATFORM:
         brightness: float = CoreDisplay.CoreDisplay_Display_GetUserBrightness(display)
 
         return round(brightness * 100, 0)
+
+
+    def set_brightness_iokit(brightness: int) -> int:
+        brightness /= 100
+        service = IOServiceGetMatchingService(kIOMasterPortDefault,
+                                              IOServiceMatching(DISPLAY_CONNECT))
+        return IODisplaySetFloatParameter(service,
+                                          0,
+                                          kIODisplayBrightnessKey,
+                                          brightness)
 
 
 elif 'Windows' in _PLATFORM:
@@ -65,23 +79,11 @@ elif 'Linux' in _PLATFORM:
 
 
 else:
-    raise Exception('Unknown host platform. This works on macOS, Windows and Linux.')
-
-from idle import IDLE_FUNCS
+    raise Exception('Unknown host platform. Project works on macOS, Windows and Linux.')
 
 
 def get_idle() -> float:
     return IDLE_FUNCS[_PLATFORM]()
-
-
-def set_brightness_mac(brightness: int) -> int:
-    brightness /= 100
-    service = IOServiceGetMatchingService(kIOMasterPortDefault,
-                                          IOServiceMatching(DISPLAY_CONNECT))
-    return IODisplaySetFloatParameter(service,
-                                      0,
-                                      kIODisplayBrightnessKey,
-                                      brightness)
 
 
 def set_brightness_windows(brightness: int):
@@ -134,6 +136,9 @@ def on_face_adjust_brightness(capture_device: int,
     :param capture_device:
     :param brightness:
     :param frames:
+    :param tries:
+    :param _tries:
+
     :return:
     """
 
@@ -188,6 +193,11 @@ def on_idle_adjust_brightness(capture_device: int,
               default=NO_BRIGHTNESS, show_default=True,
               type=click.types.IntRange(0, 100),
               help="Screen brightness between 0 and 100.")
+@click.option('-c', '--change',
+              is_flag=True,
+              show_default=True,
+              help="Use this setting to simply change the display brightness, "
+                   "while ignoring other settings besides brightness and device.")
 @click.option('-i', '--idle',
               default=DEFAULT_IDLE_MIN_SEC, show_default=True,
               help="Seconds between inactivtiy and facial recognition.")
@@ -196,13 +206,17 @@ def on_idle_adjust_brightness(capture_device: int,
               help="Number of frames to capture in succession. \n"
                    "Increase this value if you're getting false negatives")
 @click.option('-s', '--step', is_flag=True, help='Enable stepping.')
-def run(device: int, brightness: int, idle: float, frames: int, step: bool):
+def run(device: int, brightness: int, change: bool, idle: float, frames: int, step: bool):
     if frames <= 0:
         print("Error: number of frames cannot be less than 1.")
         exit(STATUS_FAILURE)
 
     if step:
         print("Step flag detected, but is unimplemented.")
+
+    if change:
+        set_brightness(brightness)
+        exit(0)
 
     while True:
         changed, sleep_for = on_idle_adjust_brightness(device, brightness, idle, frames)
