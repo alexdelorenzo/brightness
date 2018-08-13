@@ -8,6 +8,10 @@
 Python 3.7.0+
 
 
+### Application Dependencies
+`pip3 install -r requirements.txt`
+
+
 ### Platform Dependencies
 
 #### macOS
@@ -31,9 +35,6 @@ Please install `xbacklight` and `xprintidle`.
 
 ##### Ubuntu & Debian
 `sudo apt install xbacklight xprintidle`
-
-### Application Dependencies
-`pip3 install -r requirements.txt`
 
 
 # Usage

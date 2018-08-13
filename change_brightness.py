@@ -115,7 +115,7 @@ def contains_face(frame: np.array) -> bool:
     return len(face_recognition.face_locations(frame)) > 0
 
 
-def adjust_brightness_on_face(capture_device: int,
+def on_face_adjust_brightness(capture_device: int,
                               brightness: int = NO_BRIGHTNESS,
                               frames: int = DEFAULT_FRAMES,
                               tries: int = 2,
@@ -144,7 +144,7 @@ def adjust_brightness_on_face(capture_device: int,
     return False
 
 
-def adjust_brightness_on_idle(capture_device: int,
+def on_idle_adjust_brightness(capture_device: int,
                               brightness: int = NO_BRIGHTNESS,
                               idle_minimum: float = DEFAULT_IDLE_MIN_SEC,
                               frames: int = DEFAULT_FRAMES) -> Tuple[bool, float]:
@@ -169,7 +169,7 @@ def adjust_brightness_on_idle(capture_device: int,
     if not idle_time > idle_minimum:
         return False, idle_minimum - idle_time
 
-    brightness_changed = adjust_brightness_on_face(capture_device, brightness, frames)
+    brightness_changed = on_face_adjust_brightness(capture_device, brightness, frames)
 
     return brightness_changed, idle_minimum
 
@@ -200,7 +200,7 @@ def run(device: int, brightness: int, idle: float, frames: int, step: bool):
         print("Step flag detected, but is unimplemented.")
 
     while True:
-        changed, sleep_for = adjust_brightness_on_idle(device, brightness, idle, frames)
+        changed, sleep_for = on_idle_adjust_brightness(device, brightness, idle, frames)
         sleep(sleep_for)
 
 
