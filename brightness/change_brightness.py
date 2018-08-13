@@ -49,10 +49,10 @@ if 'Darwin' in _PLATFORM:
         return CoreDisplay.CoreDisplay_Display_SetUserBrightness(display, brightness)
 
 
-    def get_brightness_coredisplay(display: int) -> int:
+    def get_brightness_coredisplay(display: int) -> float:
         brightness: float = CoreDisplay.CoreDisplay_Display_GetUserBrightness(display)
 
-        return round(brightness * 100, 0)
+        return round(brightness * 100, 2)
 
 
     def set_brightness_iokit(brightness: int) -> int:
@@ -63,7 +63,6 @@ if 'Darwin' in _PLATFORM:
                                           0,
                                           kIODisplayBrightnessKey,
                                           brightness)
-
 
 elif 'Windows' in _PLATFORM:
     _PLATFORM = 'Windows'
@@ -198,6 +197,11 @@ def on_idle_adjust_brightness(capture_device: int,
               show_default=True,
               help="Use this setting to simply change the display brightness, "
                    "while ignoring other settings besides brightness and device.")
+@click.option('-g', '--get-brightness',
+              is_flag=True,
+              show_default=True,
+              help="Use this setting to simply change the display brightness, "
+                   "while ignoring other settings besides brightness and device.")
 @click.option('-i', '--idle',
               default=DEFAULT_IDLE_MIN_SEC, show_default=True,
               help="Seconds between inactivtiy and facial recognition.")
@@ -206,7 +210,7 @@ def on_idle_adjust_brightness(capture_device: int,
               help="Number of frames to capture in succession. \n"
                    "Increase this value if you're getting false negatives")
 @click.option('-s', '--step', is_flag=True, help='Enable stepping.')
-def run(device: int, brightness: int, change: bool, idle: float, frames: int, step: bool):
+def run(device: int, brightness: int, change: bool, get_brightness: bool, idle: float, frames: int, step: bool):
     if frames <= 0:
         print("Error: number of frames cannot be less than 1.")
         exit(STATUS_FAILURE)
@@ -214,9 +218,17 @@ def run(device: int, brightness: int, change: bool, idle: float, frames: int, st
     if step:
         print("Step flag detected, but is unimplemented.")
 
+    if get_brightness:
+        if _PLATFORM == 'Darwin':
+            print(get_brightness_coredisplay(0))
+            exit(STATUS_SUCCESS)
+        else:
+            print(f"Feature not yet implemented for {_PLATFORM}")
+            exit(STATUS_FAILURE)
+
     if change:
         set_brightness(brightness)
-        exit(0)
+        exit(STATUS_SUCCESS)
 
     while True:
         changed, sleep_for = on_idle_adjust_brightness(device, brightness, idle, frames)

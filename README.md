@@ -50,11 +50,19 @@ Options:
   -d, --device INTEGER            Capture device.  [default: 0]
   -b, --brightness INTEGER RANGE  Screen brightness between 0 and 100.
                                   [default: 0]
+  -c, --change                    Use this setting to simply change the
+                                  display brightness, while ignoring other
+                                  settings besides brightness and device.
+                                  [default: False]
+  -g, --get-brightness            Use this setting to simply change the
+                                  display brightness, while ignoring other
+                                  settings besides brightness and device.
+                                  [default: False]
   -i, --idle INTEGER              Seconds between inactivtiy and facial
-                                  recognition.  [default: 10]
+                                  recognition.  [default: 300]
   -f, --frames INTEGER            Number of frames to capture in succession.
                                   Increase this value if you're getting false
-                                  negatives  [default: 3]
+                                  negatives  [default: 2]
   -s, --step                      Enable stepping.
   --help                          Show this message and exit.
 ```
