@@ -2,6 +2,5 @@ face_recognition
 opencv-python
 click
 numpy
-
 wmi; sys_platform == 'win32'
 pyobjc; sys_platform == 'darwin'

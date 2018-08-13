@@ -29,7 +29,6 @@ def import_iokit(iokit_location: str = IOKIT_FRAMEWORK,
 
 if 'Darwin' in _PLATFORM:
     _PLATFORM = 'Darwin'
-    from CoreFoundation import CFStringCreateWithCString, CFRelease, kCFStringEncodingASCII
     import objc
 
     import_iokit()
@@ -37,6 +36,19 @@ if 'Darwin' in _PLATFORM:
 
     CoreDisplay = CDLL("/System/Library/Frameworks/CoreDisplay.framework/CoreDisplay")
     CoreDisplay.CoreDisplay_Display_SetUserBrightness.argtypes = [c_int, c_double]
+    CoreDisplay.CoreDisplay_Display_GetUserBrightness.argtypes = [c_int]
+    CoreDisplay.CoreDisplay_Display_GetUserBrightness.restype = c_double
+
+    def set_brightness_coredisplay(display: int, brightness: int) -> int:
+        brightness /= 100
+
+        return CoreDisplay.CoreDisplay_Display_SetUserBrightness(display, brightness)
+
+
+    def get_brightness_coredisplay(display: int) -> int:
+        brightness: float = CoreDisplay.CoreDisplay_Display_GetUserBrightness(display)
+
+        return round(brightness * 100, 0)
 
 
 elif 'Windows' in _PLATFORM:
@@ -70,12 +82,6 @@ def set_brightness_mac(brightness: int) -> int:
                                       0,
                                       kIODisplayBrightnessKey,
                                       brightness)
-
-
-def set_brightness_coredisplay(display: int, brightness: int) -> int:
-    brightness /= 100
-
-    return CoreDisplay.CoreDisplay_Display_SetUserBrightness(display, brightness)
 
 
 def set_brightness_windows(brightness: int):
@@ -131,14 +137,13 @@ def on_face_adjust_brightness(capture_device: int,
     :return:
     """
 
-    if not any(map(contains_face, get_snapshots(capture_device, frames))):
-        # if _tries < tries:
-        #     sleep(0.5)
-        #
-        #     return adjust_brightness_on_face(capture_device, brightness, frames, tries, _tries + 1)
-        #
-        set_brightness(brightness)
+    change_brightness = get_brightness_coredisplay(capture_device) != brightness
 
+    if change_brightness and not any(map(contains_face, get_snapshots(capture_device, frames))):
+        if _tries < tries:
+            return on_face_adjust_brightness(capture_device, brightness, frames, tries, _tries + 1)
+
+        set_brightness(brightness)
         return True
 
     return False
