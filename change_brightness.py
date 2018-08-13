@@ -1,7 +1,7 @@
 import platform
 from subprocess import getstatusoutput
 from time import sleep
-from typing import List, Dict, Callable
+from typing import List, Dict, Callable, Any, Tuple
 
 import click
 import cv2
@@ -9,12 +9,13 @@ import face_recognition
 import numpy as np
 
 from common import NO_BRIGHTNESS, DEFAULT_CAPTURE_DEV, DEFAULT_FRAMES, DEFAULT_IDLE_MIN_SEC, STATUS_SUCCESS, \
-    BRIDGESUPPORT_FILE, IOKIT_FRAMEWORK, DISPLAY_CONNECT, kIODisplayBrightnessKey
+    BRIDGESUPPORT_FILE, IOKIT_FRAMEWORK, DISPLAY_CONNECT, kIODisplayBrightnessKey, STATUS_FAILURE
 
 _PLATFORM = platform.platform()
 
 
-def import_iokit(iokit_location: str = IOKIT_FRAMEWORK, namespace: Dict[str, Callable] = None):
+def import_iokit(iokit_location: str = IOKIT_FRAMEWORK,
+                 namespace: Dict[str, Any] = None):
     if namespace is None:
         namespace = globals()
 
@@ -32,6 +33,11 @@ if 'Darwin' in _PLATFORM:
     import objc
 
     import_iokit()
+    from ctypes import CDLL, c_int, c_double, c_void_p
+
+    CoreDisplay = CDLL("/System/Library/Frameworks/CoreDisplay.framework/CoreDisplay")
+    CoreDisplay.CoreDisplay_Display_SetUserBrightness.argtypes = [c_int, c_double]
+
 
 elif 'Windows' in _PLATFORM:
     _PLATFORM = 'Windows'
@@ -52,6 +58,10 @@ else:
 from idle import IDLE_FUNCS
 
 
+def get_idle() -> float:
+    return IDLE_FUNCS[_PLATFORM]()
+
+
 def set_brightness_mac(brightness: int) -> int:
     brightness /= 100
     service = IOServiceGetMatchingService(kIOMasterPortDefault,
@@ -60,6 +70,12 @@ def set_brightness_mac(brightness: int) -> int:
                                       0,
                                       kIODisplayBrightnessKey,
                                       brightness)
+
+
+def set_brightness_coredisplay(display: int, brightness: int) -> int:
+    brightness /= 100
+
+    return CoreDisplay.CoreDisplay_Display_SetUserBrightness(display, brightness)
 
 
 def set_brightness_windows(brightness: int):
@@ -74,14 +90,10 @@ def set_brightness_linux(brightness: int) -> int:
 
 
 BRIGHTNESS_FUNCS: Dict[str, Callable[[int], int]] = {
-    'Darwin': set_brightness_mac,
+    'Darwin': lambda brightness: set_brightness_coredisplay(0, brightness),
     'Linux': set_brightness_linux,
     'Windows': set_brightness_windows
 }
-
-
-def get_idle() -> float:
-    return IDLE_FUNCS[_PLATFORM]()
 
 
 def set_brightness(brightness: int) -> int:
@@ -89,12 +101,12 @@ def set_brightness(brightness: int) -> int:
 
 
 def get_snapshots(capture_device: int = DEFAULT_CAPTURE_DEV, frames: int = DEFAULT_FRAMES) -> List[np.array]:
-    cam = cv2.VideoCapture(capture_device)
+    camera = cv2.VideoCapture(capture_device)
 
     # I've tried this across several Macs: Often, the first frame that is captured
     # by opencv is completely black. Grab a few frames instead.
-    frames = [cam.read()[1] for _ in range(frames)]
-    cam.release()
+    frames = [camera.read()[1] for _ in range(frames)]
+    camera.release()
 
     return frames
 
@@ -103,10 +115,39 @@ def contains_face(frame: np.array) -> bool:
     return len(face_recognition.face_locations(frame)) > 0
 
 
-def detect_and_adjust(capture_device: int,
-                      brightness: int = NO_BRIGHTNESS,
-                      idle_minimum: float = DEFAULT_IDLE_MIN_SEC,
-                      frames: int = DEFAULT_FRAMES) -> float:
+def adjust_brightness_on_face(capture_device: int,
+                              brightness: int = NO_BRIGHTNESS,
+                              frames: int = DEFAULT_FRAMES,
+                              tries: int = 2,
+                              _tries: int = 0) -> bool:
+    """
+    If face is detected in `frames` frames captured in succession from capture_device,
+    set brightness to parameter value.
+
+    Return True if brightness is changed, false if not.
+    :param capture_device:
+    :param brightness:
+    :param frames:
+    :return:
+    """
+
+    if not any(map(contains_face, get_snapshots(capture_device, frames))):
+        # if _tries < tries:
+        #     sleep(0.5)
+        #
+        #     return adjust_brightness_on_face(capture_device, brightness, frames, tries, _tries + 1)
+        #
+        set_brightness(brightness)
+
+        return True
+
+    return False
+
+
+def adjust_brightness_on_idle(capture_device: int,
+                              brightness: int = NO_BRIGHTNESS,
+                              idle_minimum: float = DEFAULT_IDLE_MIN_SEC,
+                              frames: int = DEFAULT_FRAMES) -> Tuple[bool, float]:
     """
     Detect if the system is idle, if it is, then see if we can
     capture a face from the given capture_device.
@@ -126,12 +167,11 @@ def detect_and_adjust(capture_device: int,
     idle_time = get_idle()
 
     if not idle_time > idle_minimum:
-        return idle_minimum - idle_time
+        return False, idle_minimum - idle_time
 
-    if not any(map(contains_face, get_snapshots(capture_device, frames))):
-        set_brightness(brightness)
+    brightness_changed = adjust_brightness_on_face(capture_device, brightness, frames)
 
-    return idle_minimum
+    return brightness_changed, idle_minimum
 
 
 @click.command(help="Use system idle information and facial recognition to change screen brightness "
@@ -151,13 +191,16 @@ def detect_and_adjust(capture_device: int,
               help="Number of frames to capture in succession. \n"
                    "Increase this value if you're getting false negatives")
 @click.option('-s', '--step', is_flag=True, help='Enable stepping.')
-def run(device: int, brightness: float, idle: float, frames: int, step: bool):
+def run(device: int, brightness: int, idle: float, frames: int, step: bool):
     if frames <= 0:
         print("Error: number of frames cannot be less than 1.")
-        exit(1)
+        exit(STATUS_FAILURE)
+
+    if step:
+        print("Step flag detected, but is unimplemented.")
 
     while True:
-        sleep_for = detect_and_adjust(device, brightness, idle, frames)
+        changed, sleep_for = adjust_brightness_on_idle(device, brightness, idle, frames)
         sleep(sleep_for)
 
 
