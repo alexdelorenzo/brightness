@@ -248,6 +248,7 @@ def on_idle_adjust_brightness(capture_device: int,
 @click.option('-d', '--daemon',
               is_flag=True,
               show_default=True,
+              type=click.types.BOOL,
               help="Use this setting to simply change the display brightness, "
                    "while ignoring other settings besides brightness and device.")
 @click.option('-i', '--idle',

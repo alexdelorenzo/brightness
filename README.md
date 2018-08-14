@@ -1,6 +1,6 @@
 # ☀ brightness: Adjust display brightness with your 🌞
 
-`brightness` is a daemon and command-line utility you can use to adjust your display's brightness.
+`brightness` is a daemon and command-line utility that adjusts your display's brightness.
 
 In daemonized mode, `brightness` will use facial recognition to determine whether or not to change your display's brightness when your system goes idle.
 
@@ -91,9 +91,20 @@ Options:
 ```
 
 ## Example
+
+Change the brightness to 50%
+
+`brightness -b 50`
+
+Run in daemonized mode. Check every 10 minutes for a face.
+
+`brightness -d -i 600`
+
 Check for system idle time every 120 seconds, then if idle, capture 2 frames from device `0` for use in facial recognition.
 
-`python3 change_brightness.py -d 0 --brightness 0 --idle 120 -f 2`
+`brightness -d -c 0 -b 0 -i 120 -f 2`
+
+
 
 
 # Contributions
