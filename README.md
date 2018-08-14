@@ -1,3 +1,11 @@
+# ☀ brightness: Adjust display brightness with your 🌞
+
+`brightness` is a daemon and command-line utility you can use to adjust your display's brightness.
+
+In daemonized mode, `brightness` will use facial recognition to determine whether or not to change your display's brightness when your system is idle.
+
+As a command-line utility, you can use `brightness` to get and set your display's brightness.
+
 # Installation
 
 ```bash
