@@ -1,19 +1,15 @@
-import platform
+from pathlib import Path
 from subprocess import getstatusoutput
 from time import sleep
-from typing import List, Dict, Callable, Any, Tuple
+from typing import List, Dict, Callable, Any, Tuple, Iterable, NamedTuple
 
 import click
-import cv2
-import face_recognition
-import numpy as np
+from cv2 import VideoCapture
+from numpy import array
 
-from common import NO_BRIGHTNESS, DEFAULT_CAPTURE_DEV, DEFAULT_FRAMES, DEFAULT_IDLE_MIN_SEC, STATUS_SUCCESS, \
-    BRIDGESUPPORT_FILE, IOKIT_FRAMEWORK, DISPLAY_CONNECT, kIODisplayBrightnessKey, STATUS_FAILURE
-
-from idle import IDLE_FUNCS
-
-_PLATFORM = platform.platform()
+from brightness.common import NO_BRIGHTNESS, DEFAULT_CAPTURE_DEV, DEFAULT_FRAMES, DEFAULT_IDLE_MIN_SEC, STATUS_SUCCESS, \
+    BRIDGESUPPORT_FILE, IOKIT_FRAMEWORK, DISPLAY_CONNECT, kIODisplayBrightnessKey, STATUS_FAILURE, Platform
+from brightness.idle import IDLE_FUNCS
 
 
 def import_iokit(iokit_location: str = IOKIT_FRAMEWORK,
@@ -21,55 +17,72 @@ def import_iokit(iokit_location: str = IOKIT_FRAMEWORK,
     if namespace is None:
         namespace = globals()
 
-    with open(BRIDGESUPPORT_FILE, 'r') as f:
-        bridgesupport_file = f.read()
+    bridgesupport_file: Path = \
+        next(Path(__file__).parent.glob(BRIDGESUPPORT_FILE))
 
-    objc.parseBridgeSupport(bridgesupport_file,
+    objc.parseBridgeSupport(bridgesupport_file.read_text(),
                             namespace,
                             objc.pathForFramework(iokit_location))
 
 
-if 'Darwin' in _PLATFORM:
-    _PLATFORM = 'Darwin'
-    import objc
-
-    import_iokit()
-
-    from ctypes import CDLL, c_int, c_double
-
-    CoreDisplay = CDLL("/System/Library/Frameworks/CoreDisplay.framework/CoreDisplay")
-    CoreDisplay.CoreDisplay_Display_SetUserBrightness.argtypes = [c_int, c_double]
-    CoreDisplay.CoreDisplay_Display_GetUserBrightness.argtypes = [c_int]
-    CoreDisplay.CoreDisplay_Display_GetUserBrightness.restype = c_double
+def set_brightness_mac(brightness): pass
 
 
-    def set_brightness_coredisplay(display: int, brightness: int) -> int:
-        brightness /= 100
+if Platform.this() == Platform.MAC:
+    from platform import mac_ver
 
-        return CoreDisplay.CoreDisplay_Display_SetUserBrightness(display, brightness)
+    _PLATFORM = Platform.MAC
+    version, *_ = mac_ver()
+
+    if '10.13.' in version:
+        from ctypes import CDLL, c_int, c_double
+
+        CoreDisplay = CDLL("/System/Library/Frameworks/CoreDisplay.framework/CoreDisplay")
+        CoreDisplay.CoreDisplay_Display_SetUserBrightness.argtypes = [c_int, c_double]
+        CoreDisplay.CoreDisplay_Display_GetUserBrightness.argtypes = [c_int]
+        CoreDisplay.CoreDisplay_Display_GetUserBrightness.restype = c_double
 
 
-    def get_brightness_coredisplay(display: int) -> float:
-        brightness: float = CoreDisplay.CoreDisplay_Display_GetUserBrightness(display)
+        def set_brightness_coredisplay(display: int, brightness: int) -> int:
+            brightness /= 100
 
-        return round(brightness * 100, 2)
+            return CoreDisplay.CoreDisplay_Display_SetUserBrightness(display, brightness)
 
 
-    def set_brightness_iokit(brightness: int) -> int:
-        brightness /= 100
-        service = IOServiceGetMatchingService(kIOMasterPortDefault,
-                                              IOServiceMatching(DISPLAY_CONNECT))
-        return IODisplaySetFloatParameter(service,
-                                          0,
-                                          kIODisplayBrightnessKey,
-                                          brightness)
+        def get_brightness_coredisplay(display: int) -> float:
+            brightness: float = CoreDisplay.CoreDisplay_Display_GetUserBrightness(display)
 
-elif 'Windows' in _PLATFORM:
+            return round(brightness * 100, 2)
+
+
+        def set_brightness_mac(brightness: int):
+            return set_brightness_coredisplay(0, brightness)
+
+    else:
+        import objc
+
+        import_iokit()
+
+
+        def set_brightness_iokit(brightness: int) -> int:
+            brightness /= 100
+            service = IOServiceGetMatchingService(kIOMasterPortDefault,
+                                                  IOServiceMatching(DISPLAY_CONNECT))
+            return IODisplaySetFloatParameter(service,
+                                              0,
+                                              kIODisplayBrightnessKey,
+                                              brightness)
+
+
+        set_brightness_mac = set_brightness_iokit
+
+
+elif Platform.this() == Platform.WINDOWS:
     _PLATFORM = 'Windows'
     import wmi
 
 
-elif 'Linux' in _PLATFORM:
+elif Platform.this() == Platform.LINUX:
     _PLATFORM = 'Linux'
     status, output = getstatusoutput("which xbacklight")
 
@@ -82,7 +95,7 @@ else:
 
 
 def get_idle() -> float:
-    return IDLE_FUNCS[_PLATFORM]()
+    return IDLE_FUNCS[Platform.this()]()
 
 
 def set_brightness_windows(brightness: int):
@@ -97,18 +110,18 @@ def set_brightness_linux(brightness: int) -> int:
 
 
 BRIGHTNESS_FUNCS: Dict[str, Callable[[int], int]] = {
-    'Darwin': lambda brightness: set_brightness_coredisplay(0, brightness),
-    'Linux': set_brightness_linux,
-    'Windows': set_brightness_windows
+    Platform.MAC: set_brightness_mac,
+    Platform.LINUX: set_brightness_linux,
+    Platform.WINDOWS: set_brightness_windows
 }
 
 
 def set_brightness(brightness: int) -> int:
-    return BRIGHTNESS_FUNCS[_PLATFORM](brightness)
+    return BRIGHTNESS_FUNCS[Platform.this()](brightness)
 
 
-def get_snapshots(capture_device: int = DEFAULT_CAPTURE_DEV, frames: int = DEFAULT_FRAMES) -> List[np.array]:
-    camera = cv2.VideoCapture(capture_device)
+def get_snapshots(capture_device: int = DEFAULT_CAPTURE_DEV, frames: int = DEFAULT_FRAMES) -> List[array]:
+    camera = VideoCapture(capture_device)
 
     # I've tried this across several Macs: Often, the first frame that is captured
     # by opencv is completely black. Grab a few frames instead.
@@ -118,13 +131,22 @@ def get_snapshots(capture_device: int = DEFAULT_CAPTURE_DEV, frames: int = DEFAU
     return frames
 
 
-def contains_face(frame: np.array) -> bool:
-    return len(face_recognition.face_locations(frame)) > 0
+# face_recognition takes 6 seconds to load on my computer
+FACE_FUNC = 'face_locations'
+
+
+def contains_face(frame: array) -> bool:
+    if FACE_FUNC not in globals():
+        from face_recognition import face_locations
+        globals()[FACE_FUNC] = face_locations
+
+    return len(globals()[FACE_FUNC](frame)) > 0
 
 
 def on_face_adjust_brightness(capture_device: int,
                               brightness: int = NO_BRIGHTNESS,
                               frames: int = DEFAULT_FRAMES,
+                              idle_minimum: float = DEFAULT_IDLE_MIN_SEC,
                               tries: int = 2,
                               _tries: int = 0) -> bool:
     """
@@ -140,10 +162,16 @@ def on_face_adjust_brightness(capture_device: int,
 
     :return:
     """
+    if tries < 1:
+        tries = 1
 
     change_brightness = get_brightness_coredisplay(capture_device) != brightness
+    frames_contain_face: Iterable[bool] = map(contains_face, get_snapshots(capture_device, frames))
 
-    if change_brightness and not any(map(contains_face, get_snapshots(capture_device, frames))):
+    if change_brightness and not any(frames_contain_face):
+        if not get_idletime(idle_minimum).is_idle:
+            return False
+
         if _tries < tries:
             return on_face_adjust_brightness(capture_device, brightness, frames, tries, _tries + 1)
 
@@ -153,10 +181,29 @@ def on_face_adjust_brightness(capture_device: int,
     return False
 
 
+class IdleTime(NamedTuple):
+    is_idle: bool
+    idle_time: float
+
+
+class ChangedTime(NamedTuple):
+    is_changed: bool
+    sleep_for: float
+
+
+def get_idletime(idle_minimum: float = DEFAULT_IDLE_MIN_SEC) -> IdleTime:
+    idle_time = get_idle()
+
+    if idle_time > idle_minimum:
+        return IdleTime(True, idle_minimum)
+
+    return IdleTime(False, idle_minimum - idle_time)
+
+
 def on_idle_adjust_brightness(capture_device: int,
                               brightness: int = NO_BRIGHTNESS,
                               idle_minimum: float = DEFAULT_IDLE_MIN_SEC,
-                              frames: int = DEFAULT_FRAMES) -> Tuple[bool, float]:
+                              frames: int = DEFAULT_FRAMES) -> ChangedTime:
     """
     Detect if the system is idle, if it is, then see if we can
     capture a face from the given capture_device.
@@ -173,66 +220,76 @@ def on_idle_adjust_brightness(capture_device: int,
     :param frames:
     :return:
     """
-    idle_time = get_idle()
+    idle = get_idletime(idle_minimum)
 
-    if not idle_time > idle_minimum:
-        return False, idle_minimum - idle_time
+    if not idle.is_idle:
+        return ChangedTime(False, idle.idle_time)
 
     brightness_changed = on_face_adjust_brightness(capture_device, brightness, frames)
 
-    return brightness_changed, idle_minimum
+    return ChangedTime(brightness_changed, idle_minimum)
 
 
 @click.command(help="Use system idle information and facial recognition to change screen brightness "
-                    "when your computer idle and there isn't anyone in front of the screen.")
-@click.option('-d', '--device',
+                    "when your computer idle and there isn't anyone in front of the screen."
+                    "\n\n\n"
+                    "Run without arguments to get the current brightness for the default display."
+                    "\n\n"
+                    "$ brightness\n"
+                    "\n75.0")
+@click.option('-c', '--capture',
               default=DEFAULT_CAPTURE_DEV, show_default=True,
+              type=click.types.INT,
               help="Capture device.")
 @click.option('-b', '--brightness',
               default=NO_BRIGHTNESS, show_default=True,
               type=click.types.IntRange(0, 100),
               help="Screen brightness between 0 and 100.")
-@click.option('-c', '--change',
-              is_flag=True,
-              show_default=True,
-              help="Use this setting to simply change the display brightness, "
-                   "while ignoring other settings besides brightness and device.")
-@click.option('-g', '--get-brightness',
+@click.option('-d', '--daemon',
               is_flag=True,
               show_default=True,
               help="Use this setting to simply change the display brightness, "
                    "while ignoring other settings besides brightness and device.")
 @click.option('-i', '--idle',
               default=DEFAULT_IDLE_MIN_SEC, show_default=True,
+              type=click.types.FLOAT,
               help="Seconds between inactivtiy and facial recognition.")
 @click.option('-f', '--frames',
               default=DEFAULT_FRAMES, show_default=True,
+              type=click.types.INT,
               help="Number of frames to capture in succession. \n"
                    "Increase this value if you're getting false negatives")
-@click.option('-s', '--step', is_flag=True, help='Enable stepping.')
-def run(device: int, brightness: int, change: bool, get_brightness: bool, idle: float, frames: int, step: bool):
+# @click.option('-s', '--step', is_flag=True, help='Enable stepping.')
+def run(capture: int, brightness: int, daemon: bool, idle: float, frames: int):
     if frames <= 0:
         print("Error: number of frames cannot be less than 1.")
         exit(STATUS_FAILURE)
 
-    if step:
-        print("Step flag detected, but is unimplemented.")
+    # if step:
+    #     print("Step flag detected, but is unimplemented.")
 
-    if get_brightness:
-        if _PLATFORM == 'Darwin':
-            print(get_brightness_coredisplay(0))
-            exit(STATUS_SUCCESS)
-        else:
-            print(f"Feature not yet implemented for {_PLATFORM}")
-            exit(STATUS_FAILURE)
-
-    if change:
+    if brightness and not daemon:
         set_brightness(brightness)
         exit(STATUS_SUCCESS)
 
-    while True:
-        changed, sleep_for = on_idle_adjust_brightness(device, brightness, idle, frames)
-        sleep(sleep_for)
+    if daemon:
+        print(f'Running in daemon mode. Capture {capture} Brightness {brightness} Idle {idle} Frames {frames}')
+
+        try:
+            while True:
+                changed, sleep_for = on_idle_adjust_brightness(capture, brightness, idle, frames)
+                sleep(sleep_for)
+        except KeyboardInterrupt:
+            print("Exiting...")
+            exit(STATUS_FAILURE)
+
+    if Platform.this() == Platform.MAC:
+        print(get_brightness_coredisplay(0))
+        exit(STATUS_SUCCESS)
+
+    else:
+        print(f"Feature not yet implemented for {Platform.this()}")
+        exit(STATUS_FAILURE)
 
 
 if __name__ == '__main__':

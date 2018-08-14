@@ -1,1 +1,1 @@
-from change_brightness import *
+from brightness.change_brightness import *

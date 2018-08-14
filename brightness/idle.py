@@ -1,7 +1,7 @@
 from subprocess import getstatusoutput
 from typing import Dict, Callable
 
-from common import MAC_IDLE_CMD, STATUS_SUCCESS, NO_IDLE, LINUX_IDLE_CMD
+from brightness.common import MAC_IDLE_CMD, STATUS_SUCCESS, NO_IDLE, LINUX_IDLE_CMD, Platform
 
 
 def get_linux_idle() -> float:
@@ -23,7 +23,7 @@ def get_mac_idle() -> float:
 
 
 IDLE_FUNCS: Dict[str, Callable[[], float]] = {
-    'Darwin': get_mac_idle,
-    'Linux': get_linux_idle,
-    'Windows': lambda x: NO_IDLE
+    Platform.MAC: get_mac_idle,
+    Platform.LINUX: get_linux_idle,
+    Platform.WINDOWS: lambda x: NO_IDLE
 }

@@ -1,3 +1,6 @@
+import platform
+from typing import Optional
+
 STATUS_SUCCESS = 0
 STATUS_FAILURE = 1
 NO_IDLE = 0.0
@@ -19,3 +22,23 @@ kIODisplayBrightnessKey = "brightness"
 # idle cmds
 LINUX_IDLE_CMD = "xprintidle"
 MAC_IDLE_CMD = "ioreg -c IOHIDSystem | awk '/HIDIdleTime/ {print $NF/1000000000; exit}'"
+
+
+_PLATFORM = platform.platform()
+
+
+class Platform:
+    MAC: str = 'Darwin'
+    WINDOWS: str = 'Windows'
+    LINUX: str = 'Linux'
+
+    @staticmethod
+    def this() -> Optional[str]:
+        _platform = platform.platform()
+        platforms = Platform.MAC, Platform.WINDOWS, Platform.LINUX
+
+        return next((platform for platform in platforms
+                     if platform in _platform),
+                    _platform)
+
+
