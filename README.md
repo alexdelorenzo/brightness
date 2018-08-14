@@ -25,10 +25,10 @@ However, [`brightness` takes advantage of private CoreDisplay APIs that control 
 ```bash
 # clone the repo
 git clone https://github.com/thismachinechills/brightness.git
-cd brightness
 
 
 # install the application
+cd brightness
 pip3 install -r requirements.txt
 python3 setup.py install
 
