@@ -78,9 +78,9 @@ Options:
   -c, --capture INTEGER           Capture device.  [default: 0]
   -b, --brightness INTEGER RANGE  Screen brightness between 0 and 100.
                                   [default: 0]
-  -d, --daemon                    Use this setting to simply change the
-                                  display brightness, while ignoring other
-                                  settings besides brightness and device.
+  -d, --daemon                    Run in daemonized mode. Use facial
+                                  recognition when system goes idle to
+                                  determine whether to change brightness.
                                   [default: False]
   -i, --idle FLOAT                Seconds between inactivtiy and facial
                                   recognition.  [default: 300]

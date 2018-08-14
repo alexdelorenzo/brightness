@@ -249,8 +249,8 @@ def on_idle_adjust_brightness(capture_device: int,
               is_flag=True,
               show_default=True,
               type=click.types.BOOL,
-              help="Use this setting to simply change the display brightness, "
-                   "while ignoring other settings besides brightness and device.")
+              help="Run in daemonized mode. "
+                   "Use facial recognition when system goes idle to determine whether to change brightness.")
 @click.option('-i', '--idle',
               default=DEFAULT_IDLE_MIN_SEC, show_default=True,
               type=click.types.FLOAT,
