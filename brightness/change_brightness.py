@@ -160,11 +160,18 @@ def contains_face(frame: array) -> bool:
     return len(globals()[FACE_FUNC](frame)) > 0
 
 
+def frames_contain_face(capture_device: int, frames: int) -> bool:
+    frames_contain_face: Iterable[bool] = \
+        map(contains_face, get_snapshots(capture_device, frames))
+
+    return any(frames_contain_face)
+
+
 def on_face_adjust_brightness(capture_device: int,
                               brightness: int = NO_BRIGHTNESS,
                               frames: int = DEFAULT_FRAMES,
                               idle_minimum: float = DEFAULT_IDLE_MIN_SEC,
-                              tries: int = 2,
+                              tries: int = 4,
                               _tries: int = 0) -> bool:
     """
     If face is detected in `frames` frames captured in succession from capture_device,
@@ -182,10 +189,7 @@ def on_face_adjust_brightness(capture_device: int,
     if tries < 1:
         tries = 1
 
-    change_brightness = get_brightness_coredisplay(capture_device) != brightness
-    frames_contain_face: Iterable[bool] = map(contains_face, get_snapshots(capture_device, frames))
-
-    if change_brightness and not any(frames_contain_face):
+    if should_change_brightness(capture_device, brightness) and not frames_contain_face(capture_device, frames):
         # some time could have passed between checking for faces and awaking from idle
         if not get_idletime(idle_minimum).is_idle:
             return False
@@ -217,6 +221,8 @@ def get_idletime(idle_minimum: float = DEFAULT_IDLE_MIN_SEC) -> IdleTime:
 
     return IdleTime(False, idle_minimum - idle_time)
 
+def should_change_brightness(device: int, brightness: int) -> bool:
+    return get_brightness_coredisplay(device) != brightness
 
 def on_idle_adjust_brightness(capture_device: int,
                               brightness: int = NO_BRIGHTNESS,
@@ -238,6 +244,10 @@ def on_idle_adjust_brightness(capture_device: int,
     :param frames:
     :return:
     """
+
+    if not should_change_brightness(capture_device, brightness):
+        return ChangedTime(False, idle_minimum)
+
     idle = get_idletime(idle_minimum)
 
     if not idle.is_idle:

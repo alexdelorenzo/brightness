@@ -14,7 +14,7 @@ You probably don't like it when your screen goes off when you're looking at it. 
 
 Let's use it to make computers a little less annoying.
 
-### You're on macOS 10.13+ and want to get or adjust your brightness 
+### You want to adjust display brightness programmatically, or you're using macOS 10.13+
 
 Apple deprecated their public IOKit Framework APIs in favor of an undocumented CoreDisplay API. Deprecation of IOKit broke existing utilities.
 
