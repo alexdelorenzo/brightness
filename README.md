@@ -2,7 +2,7 @@
 
 `brightness` is a daemon and command-line utility you can use to adjust your display's brightness.
 
-In daemonized mode, `brightness` will use facial recognition to determine whether or not to change your display's brightness when your system is idle.
+In daemonized mode, `brightness` will use facial recognition to determine whether or not to change your display's brightness when your system goes idle.
 
 As a command-line utility, you can use `brightness` to get and set your display's brightness.
 
@@ -72,7 +72,6 @@ Usage: brightness [OPTIONS]
   display.
 
   $ brightness
-
   75.0
 
 Options:
