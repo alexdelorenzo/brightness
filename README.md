@@ -65,7 +65,7 @@ Please install `xbacklight` and `xprintidle`.
 Usage: brightness [OPTIONS]
 
   Use system idle information and facial recognition to change screen
-  brightness when your computer idle and there isn't anyone in front of the
+  brightness when your system is idle and there isn't anyone in front of the
   screen.
 
   Run without arguments to get the current brightness for the default

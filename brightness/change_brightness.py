@@ -231,7 +231,7 @@ def on_idle_adjust_brightness(capture_device: int,
 
 
 @click.command(help="Use system idle information and facial recognition to change screen brightness "
-                    "when your computer idle and there isn't anyone in front of the screen."
+                    "when your system is idle and there isn't anyone in front of the screen."
                     "\n\n\n"
                     "Run without arguments to get the current brightness for the default display."
                     "\n\n"
