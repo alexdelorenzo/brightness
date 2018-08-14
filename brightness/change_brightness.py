@@ -9,7 +9,8 @@ from cv2 import VideoCapture
 from numpy import array
 
 from brightness.common import NO_BRIGHTNESS, DEFAULT_CAPTURE_DEV, DEFAULT_FRAMES, DEFAULT_IDLE_MIN_SEC, STATUS_SUCCESS, \
-    BRIDGESUPPORT_FILE, IOKIT_FRAMEWORK, DISPLAY_CONNECT, kIODisplayBrightnessKey, STATUS_FAILURE, Platform
+    BRIDGESUPPORT_FILE, IOKIT_FRAMEWORK, DISPLAY_CONNECT, kIODisplayBrightnessKey, STATUS_FAILURE, Platform, \
+    COREDISPLAY_FRAMEWORK
 from brightness.idle import IDLE_FUNCS
 
 
@@ -48,14 +49,12 @@ def import_iokit(iokit_location: str = IOKIT_FRAMEWORK,
 
 if Platform.this() == Platform.MAC:
     from platform import mac_ver
-
-    _PLATFORM = Platform.MAC
     version, *_ = mac_ver()
 
     if '10.13.' in version:
         from ctypes import CDLL, c_int, c_double
 
-        CoreDisplay = CDLL("/System/Library/Frameworks/CoreDisplay.framework/CoreDisplay")
+        CoreDisplay = CDLL(COREDISPLAY_FRAMEWORK)
         CoreDisplay.CoreDisplay_Display_SetUserBrightness.argtypes = [c_int, c_double]
         CoreDisplay.CoreDisplay_Display_GetUserBrightness.argtypes = [c_int]
         CoreDisplay.CoreDisplay_Display_GetUserBrightness.restype = c_double
@@ -81,6 +80,8 @@ if Platform.this() == Platform.MAC:
 
         import_iokit()
 
+        objc.ObjCLazyModule
+
 
         def set_brightness_iokit(brightness: int) -> int:
             brightness /= 100
@@ -96,12 +97,10 @@ if Platform.this() == Platform.MAC:
 
 
 elif Platform.this() == Platform.WINDOWS:
-    _PLATFORM = 'Windows'
     import wmi
 
 
 elif Platform.this() == Platform.LINUX:
-    _PLATFORM = 'Linux'
     status, output = getstatusoutput("which xbacklight")
 
     if status != STATUS_SUCCESS:
@@ -112,7 +111,6 @@ else:
     raise Exception('Unknown host platform. Project works on macOS, Windows and Linux.')
 
 
-@printer()
 def get_idle() -> float:
     return IDLE_FUNCS[Platform.this()]()
 
@@ -154,7 +152,6 @@ def get_snapshots(capture_device: int = DEFAULT_CAPTURE_DEV, frames: int = DEFAU
 FACE_FUNC = 'face_locations'
 
 
-@printer(False)
 def contains_face(frame: array) -> bool:
     if FACE_FUNC not in globals():
         from face_recognition import face_locations
@@ -163,7 +160,6 @@ def contains_face(frame: array) -> bool:
     return len(globals()[FACE_FUNC](frame)) > 0
 
 
-@printer(True)
 def on_face_adjust_brightness(capture_device: int,
                               brightness: int = NO_BRIGHTNESS,
                               frames: int = DEFAULT_FRAMES,
@@ -213,7 +209,6 @@ class ChangedTime(NamedTuple):
     sleep_for: float
 
 
-@printer(True)
 def get_idletime(idle_minimum: float = DEFAULT_IDLE_MIN_SEC) -> IdleTime:
     idle_time = get_idle()
 
@@ -223,7 +218,6 @@ def get_idletime(idle_minimum: float = DEFAULT_IDLE_MIN_SEC) -> IdleTime:
     return IdleTime(False, idle_minimum - idle_time)
 
 
-@printer(True)
 def on_idle_adjust_brightness(capture_device: int,
                               brightness: int = NO_BRIGHTNESS,
                               idle_minimum: float = DEFAULT_IDLE_MIN_SEC,

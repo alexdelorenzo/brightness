@@ -15,6 +15,7 @@ DEFAULT_IDLE_MIN_SEC = 5 * 60
 # mac specific
 BRIDGESUPPORT_FILE = ".bridgesupport"
 IOKIT_FRAMEWORK = "/System/Library/Frameworks/IOKit.framework"
+COREDISPLAY_FRAMEWORK = "/System/Library/Frameworks/CoreDisplay.framework/CoreDisplay"
 DISPLAY_CONNECT = b"IODisplayConnect"
 kIODisplayBrightnessKey = "brightness"
 
