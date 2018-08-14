@@ -1,6 +1,20 @@
 # Installation
 
-`git clone https://github.com/thismachinechills/brightness.git`
+```bash
+# clone the repo
+git clone https://github.com/thismachinechills/brightness.git
+cd brightness
+
+
+# install the application
+pip3 install -r requirements.txt
+python3 setup.py install
+
+
+# check if it worked
+brightness --help
+```
+
 
 ## Prerequisites
 
@@ -40,30 +54,32 @@ Please install `xbacklight` and `xprintidle`.
 # Usage
 
 ```bash
-Usage: change_brightness.py [OPTIONS]
+Usage: brightness [OPTIONS]
 
   Use system idle information and facial recognition to change screen
   brightness when your computer idle and there isn't anyone in front of the
   screen.
 
+  Run without arguments to get the current brightness for the default
+  display.
+
+  $ brightness
+
+  75.0
+
 Options:
-  -d, --device INTEGER            Capture device.  [default: 0]
+  -c, --capture INTEGER           Capture device.  [default: 0]
   -b, --brightness INTEGER RANGE  Screen brightness between 0 and 100.
                                   [default: 0]
-  -c, --change                    Use this setting to simply change the
+  -d, --daemon                    Use this setting to simply change the
                                   display brightness, while ignoring other
                                   settings besides brightness and device.
                                   [default: False]
-  -g, --get-brightness            Use this setting to simply change the
-                                  display brightness, while ignoring other
-                                  settings besides brightness and device.
-                                  [default: False]
-  -i, --idle INTEGER              Seconds between inactivtiy and facial
+  -i, --idle FLOAT                Seconds between inactivtiy and facial
                                   recognition.  [default: 300]
   -f, --frames INTEGER            Number of frames to capture in succession.
                                   Increase this value if you're getting false
                                   negatives  [default: 2]
-  -s, --step                      Enable stepping.
   --help                          Show this message and exit.
 ```
 
