@@ -1,3 +1,4 @@
+from functools import wraps
 from pathlib import Path
 from subprocess import getstatusoutput
 from time import sleep
@@ -10,6 +11,23 @@ from numpy import array
 from brightness.common import NO_BRIGHTNESS, DEFAULT_CAPTURE_DEV, DEFAULT_FRAMES, DEFAULT_IDLE_MIN_SEC, STATUS_SUCCESS, \
     BRIDGESUPPORT_FILE, IOKIT_FRAMEWORK, DISPLAY_CONNECT, kIODisplayBrightnessKey, STATUS_FAILURE, Platform
 from brightness.idle import IDLE_FUNCS
+
+
+def printer(args=True):
+    def wrapper(func):
+        @wraps(func)
+        def new(*a, **kw):
+            ret = func(*a, **kw)
+            # if args:
+            #     print(func.__name__, *a, kw, 'return', ret)
+            # else:
+            #     print(func.__name__, 'return', ret)
+
+            return ret
+
+        return new
+
+    return wrapper
 
 
 def import_iokit(iokit_location: str = IOKIT_FRAMEWORK,
@@ -25,7 +43,7 @@ def import_iokit(iokit_location: str = IOKIT_FRAMEWORK,
                             objc.pathForFramework(iokit_location))
 
 
-def set_brightness_mac(brightness): pass
+# def set_brightness_mac(brightness): pass
 
 
 if Platform.this() == Platform.MAC:
@@ -94,6 +112,7 @@ else:
     raise Exception('Unknown host platform. Project works on macOS, Windows and Linux.')
 
 
+@printer()
 def get_idle() -> float:
     return IDLE_FUNCS[Platform.this()]()
 
@@ -135,6 +154,7 @@ def get_snapshots(capture_device: int = DEFAULT_CAPTURE_DEV, frames: int = DEFAU
 FACE_FUNC = 'face_locations'
 
 
+@printer(False)
 def contains_face(frame: array) -> bool:
     if FACE_FUNC not in globals():
         from face_recognition import face_locations
@@ -143,6 +163,7 @@ def contains_face(frame: array) -> bool:
     return len(globals()[FACE_FUNC](frame)) > 0
 
 
+@printer(True)
 def on_face_adjust_brightness(capture_device: int,
                               brightness: int = NO_BRIGHTNESS,
                               frames: int = DEFAULT_FRAMES,
@@ -169,11 +190,12 @@ def on_face_adjust_brightness(capture_device: int,
     frames_contain_face: Iterable[bool] = map(contains_face, get_snapshots(capture_device, frames))
 
     if change_brightness and not any(frames_contain_face):
+        # some time could have passed between checking for faces and awaking from idle
         if not get_idletime(idle_minimum).is_idle:
             return False
 
         if _tries < tries:
-            return on_face_adjust_brightness(capture_device, brightness, frames, tries, _tries + 1)
+            return on_face_adjust_brightness(capture_device, brightness, frames, idle_minimum, tries, _tries + 1)
 
         set_brightness(brightness)
         return True
@@ -191,6 +213,7 @@ class ChangedTime(NamedTuple):
     sleep_for: float
 
 
+@printer(True)
 def get_idletime(idle_minimum: float = DEFAULT_IDLE_MIN_SEC) -> IdleTime:
     idle_time = get_idle()
 
@@ -200,6 +223,7 @@ def get_idletime(idle_minimum: float = DEFAULT_IDLE_MIN_SEC) -> IdleTime:
     return IdleTime(False, idle_minimum - idle_time)
 
 
+@printer(True)
 def on_idle_adjust_brightness(capture_device: int,
                               brightness: int = NO_BRIGHTNESS,
                               idle_minimum: float = DEFAULT_IDLE_MIN_SEC,
@@ -225,7 +249,7 @@ def on_idle_adjust_brightness(capture_device: int,
     if not idle.is_idle:
         return ChangedTime(False, idle.idle_time)
 
-    brightness_changed = on_face_adjust_brightness(capture_device, brightness, frames)
+    brightness_changed = on_face_adjust_brightness(capture_device, brightness, frames, idle_minimum)
 
     return ChangedTime(brightness_changed, idle_minimum)
 
