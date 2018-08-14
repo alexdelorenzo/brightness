@@ -230,8 +230,12 @@ def on_idle_adjust_brightness(capture_device: int,
     return ChangedTime(brightness_changed, idle_minimum)
 
 
-@click.command(help="Use system idle information and facial recognition to change screen brightness "
-                    "when your system is idle and there isn't anyone in front of the screen."
+@click.command(help="""
+brightness is a daemon and command-line utility that adjusts your display's brightness.
+
+In daemonized mode, brightness will use facial recognition to determine whether or not to change your display's brightness when your system goes idle.
+
+As a command-line utility, you can use brightness to get and set your display's brightness."""
                     "\n\n\n"
                     "Run without arguments to get the current brightness for the default display."
                     "\n\n"

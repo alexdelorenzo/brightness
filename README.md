@@ -64,9 +64,15 @@ Please install `xbacklight` and `xprintidle`.
 ```bash
 Usage: brightness [OPTIONS]
 
-  Use system idle information and facial recognition to change screen
-  brightness when your system is idle and there isn't anyone in front of the
-  screen.
+  brightness is a daemon and command-line utility that adjusts your
+  display's brightness.
+
+  In daemonized mode, brightness will use facial recognition to determine
+  whether or not to change your display's brightness when your system goes
+  idle.
+
+  As a command-line utility, you can use brightness to get and set your
+  display's brightness.
 
   Run without arguments to get the current brightness for the default
   display.
