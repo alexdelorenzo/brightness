@@ -6,6 +6,20 @@ In daemonized mode, `brightness` will use facial recognition to determine whethe
 
 As a command-line utility, you can use `brightness` to get and set your display's brightness.
 
+## Use Cases
+
+You intend to leave your screen on, even while there's little to no mouse or keyboard activity.  This can happen while watching a video, reading text or following a recipe. 
+
+You probably don't like it when your screen goes off when you're looking at it. There's probably a camera on your screen and it's probably in front of your face.
+
+Let's use it to make computers a little less annoying.
+
+### You're on macOS 10.13+ and want to get or adjust your brightness 
+
+Apple deprecated their public IOKit Framework APIs in favor of an undocumented CoreDisplay API. Deprecation of IOKit broke existing utilities.
+
+However, [`brightness` takes advantage of private CoreDisplay APIs that controls display brightness](https://alexdelorenzo.me/programming/2018/08/12/reverse_engineering_private_apple_apis.html), allowing us to adjust it programmatically.
+
 # Installation
 
 ```bash
@@ -102,13 +116,13 @@ Change the brightness to 50%
 
 `brightness -b 50`
 
-Run in daemonized mode. Check every 10 minutes for a face.
+Run in daemonized mode. If the system has been idle for 10 minutes (600 seconds), `brightness` will check for faces.
 
 `brightness -d -i 600`
 
-Check for system idle time every 120 seconds, then if idle, capture 2 frames from device `0` for use in facial recognition.
+Run in daemonized mode. If the system has been idle for 120 seconds, capture 3 frames from device `0` for use in facial recognition.
 
-`brightness -d -c 0 -b 0 -i 120 -f 2`
+`brightness -d -c 0 -b 0 -i 120 -f 3`
 
 
 
