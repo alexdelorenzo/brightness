@@ -14,23 +14,6 @@ from brightness.common import NO_BRIGHTNESS, DEFAULT_CAPTURE_DEV, DEFAULT_FRAMES
 from brightness.idle import IDLE_FUNCS
 
 
-def printer(args=True):
-    def wrapper(func):
-        @wraps(func)
-        def new(*a, **kw):
-            ret = func(*a, **kw)
-            # if args:
-            #     print(func.__name__, *a, kw, 'return', ret)
-            # else:
-            #     print(func.__name__, 'return', ret)
-
-            return ret
-
-        return new
-
-    return wrapper
-
-
 def import_iokit(iokit_location: str = IOKIT_FRAMEWORK,
                  namespace: Dict[str, Any] = None):
     if namespace is None:
@@ -49,6 +32,7 @@ def import_iokit(iokit_location: str = IOKIT_FRAMEWORK,
 
 if Platform.this() == Platform.MAC:
     from platform import mac_ver
+
     version, *_ = mac_ver()
 
     if '10.13.' in version:
@@ -205,11 +189,11 @@ def on_face_adjust_brightness(capture_device: int,
 
 class IdleTime(NamedTuple):
     is_idle: bool
-    idle_time: float
+    idle_for: float
 
 
 class ChangedTime(NamedTuple):
-    is_changed: bool
+    changed: bool
     sleep_for: float
 
 
@@ -217,12 +201,14 @@ def get_idletime(idle_minimum: float = DEFAULT_IDLE_MIN_SEC) -> IdleTime:
     idle_time = get_idle()
 
     if idle_time > idle_minimum:
-        return IdleTime(True, idle_minimum)
+        return IdleTime(is_idle=True, idle_for=idle_minimum)
 
-    return IdleTime(False, idle_minimum - idle_time)
+    return IdleTime(is_idle=False, idle_for=idle_minimum - idle_time)
+
 
 def should_change_brightness(device: int, brightness: int) -> bool:
     return get_brightness_coredisplay(device) != brightness
+
 
 def on_idle_adjust_brightness(capture_device: int,
                               brightness: int = NO_BRIGHTNESS,
@@ -246,12 +232,12 @@ def on_idle_adjust_brightness(capture_device: int,
     """
 
     if not should_change_brightness(capture_device, brightness):
-        return ChangedTime(False, idle_minimum)
+        return ChangedTime(changed=False, sleep_for=idle_minimum)
 
     idle = get_idletime(idle_minimum)
 
     if not idle.is_idle:
-        return ChangedTime(False, idle.idle_time)
+        return ChangedTime(changed=False, sleep_for=idle.idle_for)
 
     brightness_changed = on_face_adjust_brightness(capture_device, brightness, frames, idle_minimum)
 
