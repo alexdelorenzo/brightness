@@ -15,12 +15,12 @@ from brightness.idle import IDLE_FUNCS
 
 
 def import_iokit(iokit_location: str = IOKIT_FRAMEWORK,
+                 bridgesupport_location: str = BRIDGESUPPORT_FILE,
                  namespace: Dict[str, Any] = None):
     if namespace is None:
         namespace = globals()
 
-    bridgesupport_file: Path = \
-        next(Path(__file__).parent.glob(BRIDGESUPPORT_FILE))
+    bridgesupport_file: Path = Path(bridgesupport_location)
 
     objc.parseBridgeSupport(bridgesupport_file.read_text(),
                             namespace,
@@ -41,7 +41,7 @@ if Platform.this() == Platform.MAC:
         CoreDisplay = CDLL(COREDISPLAY_FRAMEWORK)
         CoreDisplay.CoreDisplay_Display_SetUserBrightness.argtypes = [c_int, c_double]
         CoreDisplay.CoreDisplay_Display_GetUserBrightness.argtypes = [c_int]
-        CoreDisplay.CoreDisplay_Display_GetUserBrightness.restype = c_double
+        # CoreDisplay.CoreDisplay_Display_GetUserBrightness.restype = c_double
 
 
         def set_brightness_coredisplay(display: int, brightness: int) -> int:
@@ -62,9 +62,11 @@ if Platform.this() == Platform.MAC:
     else:
         import objc
 
-        import_iokit()
+        path: Path = next(Path(__file__).parent.glob(BRIDGESUPPORT_FILE))
 
-        objc.ObjCLazyModule
+        import_iokit(bridgesupport_location=str(path.absolute()))
+
+        # objc.ObjCLazyModule
 
 
         def set_brightness_iokit(brightness: int) -> int:
