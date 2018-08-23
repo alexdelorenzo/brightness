@@ -37,6 +37,9 @@ python3 setup.py install
 brightness --help
 ```
 
+## Notes
+
+I've only tested this on macOS 10.13
 
 ## Prerequisites
 
