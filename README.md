@@ -1,4 +1,4 @@
-# ☀ brightness: Adjust display brightness with your 🌞
+# ☀ brightness: Adjust display brightness with your🌞
 
 `brightness` is a command-line utility and daemon that adjusts your display's brightness.
 
