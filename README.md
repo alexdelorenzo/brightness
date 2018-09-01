@@ -18,7 +18,7 @@ Let's use it to make computers a little less annoying.
 
 Apple deprecated their public IOKit Framework APIs in favor of an undocumented CoreDisplay API. Deprecation of IOKit broke existing utilities.
 
-However, [`brightness` takes advantage of private CoreDisplay APIs that control display brightness](https://alexdelorenzo.me/programming/2018/08/12/reverse_engineering_private_apple_apis.html), allowing us to adjust it programmatically.
+However, [`brightness` takes advantage of private CoreDisplay APIs that control display brightness](https://alexdelorenzo.me/programming/2018/08/16/reverse_engineering_private_apple_apis.html), allowing us to adjust it programmatically.
 
 # Installation
 
